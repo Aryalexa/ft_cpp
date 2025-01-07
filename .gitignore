@@ -1,6 +1,10 @@
+.vscode/
+megaphone
+phonebook
+
 # Prerequisites
 *.d
-
+. << std::endl;
 # Compiled Object files
 *.slo
 *.lo
