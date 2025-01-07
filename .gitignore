@@ -1,6 +1,8 @@
 .vscode/
 megaphone
 phonebook
+testAccount
+*.log
 
 # Prerequisites
 *.d

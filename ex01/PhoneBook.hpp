@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_H
 #define PHONEBOOK_H
 
-#include "Contact.h"
+#include "Contact.hpp"
 #include <iostream>
 #include <iomanip>
 
@@ -23,7 +23,5 @@ public:
 	void displayContactDetails(size_t index);
 
 };
-
-
 
 #endif
