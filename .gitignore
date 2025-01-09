@@ -1,8 +1,13 @@
 .vscode/
+*.log
+
+#mod00
 megaphone
 phonebook
 testAccount
-*.log
+
+#mod01
+
 
 # Prerequisites
 *.d
