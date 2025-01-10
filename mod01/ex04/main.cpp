@@ -15,7 +15,7 @@ int main(int argn, char *argv[])
 	std::ifstream fin(filename, std::ios::in); // fstream
 	if (!fin)
 	{
-		std::cout << "Error. " << filename << " not found" << std::endl;
+		std::cout << "Error. " << filename << " not found or allowed" << std::endl;
 		return (2);	
 	}
 

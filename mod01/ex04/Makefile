@@ -30,17 +30,33 @@ test:	$(NAME)
 		else \
 			echo "Test 1: no args -> OK✅"; \
 		fi
-		@if ./$(NAME) "no-existing-file.txt" 23 24; then \
-			echo "Test 2: file not found -> FAIL❌"; \
+		@if ./$(NAME) er rt ty er; then \
+			echo "Test 2: too many args -> FAIL"❌; \
 		else \
-			echo "Test 2: file not found -> OK✅"; \
+			echo "Test 2: too many args -> OK✅"; \
 		fi
-
+		@if ./$(NAME) "no-existing-file.txt" 23 24; then \
+			echo "Test 3: file not found -> FAIL❌"; \
+		else \
+			echo "Test 3: file not found -> OK✅"; \
+		fi
+		@chmod 000 test-forbidden.txt
+		@if ./$(NAME) "test-forbidden.txt" 23 24; then \
+			echo "Test 4: file with no permissions -> FAIL❌"; \
+		else \
+			echo "Test 4: file with no permissions -> OK✅"; \
+		fi
+		@chmod 644 test-forbidden.txt
+		@if ./$(NAME) "test-empty.txt" 23 24; then \
+			echo "Test 5: empty file -> OK✅"; \
+		else \
+			echo "Test 5: empty file -> FAIL❌"; \
+		fi
 		@./$(NAME) "test-ana.txt" ana fabiola
 		@if diff "test-ana.txt.replace" "test-ana-sol.txt"; then \
-			echo "Test 3: File content matches -> OK✅"; \
+			echo "Test 6: File content matches -> OK✅"; \
 		else \
-			echo "Test 3: File content matches -> FAIL❌"; \
+			echo "Test 6: File content matches -> FAIL❌"; \
 		fi 
 
 .PHONY: all clean fclean re test

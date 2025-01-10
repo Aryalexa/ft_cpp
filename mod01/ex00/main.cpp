@@ -9,13 +9,13 @@ int main ()
 	z->announce();
 	delete z;
 
-	Zombie *w = new Zombie("aa");
-	w->announce();
-	delete w;
-
 	z = new Zombie("sdf");
 	z->announce();
 	delete z;
+
+	Zombie *w = new Zombie("aa");
+	w->announce();
+	delete w;
 
 	return 0;
 }
