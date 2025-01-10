@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <string>
-#include "PhoneBook.h"
+#include "PhoneBook.hpp"
 
 enum Instruction {
     IAdd,
@@ -83,5 +83,4 @@ int main()
 			exit = true;
 	}
 	return 0;
-
 }
