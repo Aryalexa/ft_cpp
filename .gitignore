@@ -12,6 +12,9 @@ violence
 sedIsStreamEditor
 *.replace
 
+# mod02
+fixedpt
+
 # Prerequisites
 *.d
 . << std::endl;

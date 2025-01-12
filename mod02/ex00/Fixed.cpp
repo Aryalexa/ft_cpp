@@ -2,6 +2,8 @@
 #include "Fixed.hpp"
 #include <iostream>
 
+const int Fixed::W = 8; // number of fractional bits
+
 Fixed::Fixed(): rawValue(0)
 {
 	std::cout << "Default constructor called" << std::endl;
