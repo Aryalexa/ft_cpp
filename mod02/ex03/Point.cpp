@@ -20,3 +20,24 @@ Point &Point::operator=(const Point &other)
 Point::~Point()
 {
 }
+Fixed Point::getX() const
+{
+	return x;
+}
+Fixed Point::getY() const
+{
+	return y;
+}
+std::ostream &operator<<(std::ostream &ost, const Point &p)
+{
+	ost << "P(" << p.getX() << ", " << p.getY() << ")";
+	return ost;
+}
+Point Point::operator+(const Point &other) const
+{
+	return Point((x + other.x).toFloat(), (y + other.y).toFloat());
+}
+Point Point::operator-(const Point &other) const
+{
+	return Point((x - other.x).toFloat(), (y - other.y).toFloat());
+}
