@@ -16,6 +16,9 @@ sedIsStreamEditor
 fixedpt
 bsp
 
+# mod03
+trap
+
 # Prerequisites
 *.d
 . << std::endl;
