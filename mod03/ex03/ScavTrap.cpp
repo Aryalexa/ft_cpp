@@ -28,7 +28,17 @@ ScavTrap::~ScavTrap()
 {
 	std::cout << "ScavTrap destructor()" << std::endl;
 }
-
+void ScavTrap::attack(const std::string& target)
+{
+	int cost = 1;
+	if (energy_points < cost)
+	{
+		std::cout << "ScavTrap " << name << " has no energy to attack." << std::endl;
+		return;
+	}
+	std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << attack_damage << " points of damage!" << std::endl;
+	--energy_points;
+}
 void ScavTrap::guardGate()
 {
 	std::cout << "ScavTrap "<< name<< " is now in Gate keeper mode." << std::endl;

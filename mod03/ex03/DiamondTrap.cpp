@@ -32,7 +32,7 @@ DiamondTrap::~DiamondTrap()
 
 void DiamondTrap::attack(const std::string& target)
 {
-	std::cout << "DiamondTrap " << name << " tries to atttack " << target << std::endl;
+	std::cout << "DiamondTrap " << name << " tries to attack " << target << std::endl;
 	ScavTrap::attack(target);
 }
 void DiamondTrap::whoAmI()

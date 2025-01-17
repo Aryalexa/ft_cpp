@@ -12,4 +12,6 @@ int main()
 	}
 	cp_b.beRepaired(3);
 	cp_a.beRepaired(3);
+	cp_a.attack(cp_b.getName());
+	cp_b.takeDamage(cp_a.getAttackDamage());
 }
