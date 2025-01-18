@@ -4,23 +4,23 @@ CXXFLAGS = -std=c++98 -Wall -Wextra -Werror
 NAME = animals
 
 SRCS = main.cpp Animal.cpp WrongAnimal.cpp Cat.cpp WrongCat.cpp Dog.cpp
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:%.cpp=build/%.o)
 
-all: 		$(NAME)
+all: $(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME): $(OBJS)
 			$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
+build/%.o: %.cpp
+			@mkdir -p build
 			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-			rm -f $(OBJS)
+			rm -rf build
 
-fclean: 	clean
+fclean: clean
 			rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
