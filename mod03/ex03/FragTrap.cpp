@@ -19,9 +19,13 @@ FragTrap &FragTrap::operator=(const FragTrap &other)
 {
 	std::cout << "FragTrap = operator()" << std::endl;
 
-	if (this == &other)
-		return *this;
-	*this = FragTrap(other);
+	if (this != &other)
+	{
+		name = other.name;
+		hit_points = other.hit_points;
+		energy_points = other.energy_points;
+		attack_damage = other.attack_damage;
+	}
 	return *this;
 }
 FragTrap::~FragTrap()

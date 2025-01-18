@@ -19,9 +19,13 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
 	std::cout << "ScavTrap = operator()" << std::endl;
 
-	if (this == &other)
-		return *this;
-	*this = ScavTrap(other);
+	if (this != &other)
+	{
+		name = other.name;
+		hit_points = other.hit_points;
+		energy_points = other.energy_points;
+		attack_damage = other.attack_damage;
+	}
 	return *this;
 }
 ScavTrap::~ScavTrap()

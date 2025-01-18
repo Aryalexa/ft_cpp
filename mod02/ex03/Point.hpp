@@ -8,11 +8,12 @@ private:
 	const Fixed x;
 	const Fixed y;
 
+	Point &operator=(const Point &other); // disable to use in public
+
 public:
 	Point();
 	Point(const float xf, const float yf);
 	Point(const Point &other);
-	Point &operator=(const Point &other);
 	~Point();
 	Fixed getX() const;
 	Fixed getY() const;

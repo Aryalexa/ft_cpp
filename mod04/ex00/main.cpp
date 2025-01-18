@@ -4,6 +4,11 @@
 
 int main()
 {
+	{
+		Animal a;
+		a = Animal("other");
+	}
+	std::cout << std::endl;
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog(); // pointer
 	const Animal* i = new Cat();

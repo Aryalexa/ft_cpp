@@ -4,6 +4,7 @@
 int main( void ) {
 	Fixed a; // default constr
 	Fixed b( a ); // copy constr
+	Fixed b2 = a; // copy constr 
 	Fixed c; //default
 	c = b; // =
 	std::cout << a.getRawBits() << std::endl;

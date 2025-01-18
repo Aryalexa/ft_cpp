@@ -28,9 +28,13 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
 	std::cout << "ClapTrap = operator()" << std::endl;
 
-	if (this == &other)
-		return *this;
-	*this = ClapTrap(other);
+	if (this != &other)
+	{
+		name = other.name;
+		hit_points = other.hit_points;
+		energy_points = other.energy_points;
+		attack_damage = other.attack_damage;
+	}
 	return *this;
 }
 ClapTrap::~ClapTrap()

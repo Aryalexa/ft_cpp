@@ -20,9 +20,14 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 {
 	std::cout << "DiamondTrap = operator()" << std::endl;
 
-	if (this == &other)
-		return *this;
-	*this = DiamondTrap(other);
+	if (this != &other)
+	{
+		name = other.name;
+		ClapTrap::name = other.ClapTrap::name;
+		hit_points = other.hit_points;
+		energy_points = other.energy_points;
+		attack_damage = other.attack_damage;
+	}
 	return *this;
 }
 DiamondTrap::~DiamondTrap()

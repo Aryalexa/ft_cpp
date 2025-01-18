@@ -12,10 +12,9 @@ Point::Point(const Point &other): x(other.x), y(other.y)
 }
 Point &Point::operator=(const Point &other)
 {
-	if (this == &other)
-		return *this;
-	*this = Point(other);
-	return *this;
+	(void)other;
+	throw std::runtime_error("Copy assignment is not allowed.");
+    return *this; // unreachable, but compiler needs it.
 }
 Point::~Point()
 {

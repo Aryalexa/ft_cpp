@@ -1,6 +1,6 @@
 #include "Cat.hpp"
 
-Cat::Cat(): Animal("Cat")
+Cat::Cat(): Animal("Cat"), brain(new Brain)
 {
 	std::cout << "Cat default constructor()" << std::endl;
 }
@@ -8,6 +8,8 @@ Cat::Cat(): Animal("Cat")
 Cat::Cat(const Cat &other): Animal(other.type)
 {
 	std::cout << "Cat copy constructor()" << std::endl;
+	brain = new Brain;
+	*brain = *other.brain;
 }
 Cat &Cat::operator=(const Cat &other)
 {
@@ -15,12 +17,15 @@ Cat &Cat::operator=(const Cat &other)
 	if (this != &other)
 	{
 		type = other.type;
+		brain = new Brain;
+		*brain = *other.brain;
 	}
 	return *this;
 }
 Cat::~Cat()
 {
 	std::cout << "Cat destructor()" << std::endl;
+	delete brain;
 }
 void Cat::makeSound() const
 {

@@ -5,6 +5,9 @@ int main()
 {
 	ClapTrap cp_a("AA");
 	ClapTrap cp_b("BB");
+	ClapTrap cp_c = cp_a;
+	ClapTrap cp_d;
+	cp_d = cp_a;
 	for (int i=0;i<11;++i)
 	{
 		cp_a.attack(cp_b.getName());
