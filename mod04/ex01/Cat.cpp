@@ -31,3 +31,12 @@ void Cat::makeSound() const
 {
 	std::cout << "Cat meows." << std::endl;
 }
+void Cat::haveAnIdea(const std::string &idea)
+{
+	brain->addIdea(idea);
+}
+void Cat::showIdeas() const
+{
+	brain->showIdeas();
+}
+

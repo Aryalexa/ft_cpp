@@ -26,3 +26,16 @@ Brain::~Brain()
 {
 	std::cout << "Brain destructor()" << std::endl;
 }
+void Brain::addIdea(const std::string &idea)
+{
+	if (curIdea == NIDEAS)
+		return;
+	ideas[curIdea] = idea;
+	++curIdea;
+}
+void Brain::showIdeas() const
+{
+	for (int i = 0; i < curIdea; ++i)
+		std::cout << i+1 << ". " << ideas[i] << std::endl;
+}
+
