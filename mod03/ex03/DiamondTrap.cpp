@@ -42,6 +42,6 @@ void DiamondTrap::whoAmI()
 
 std::ostream &operator<<(std::ostream &ost, const DiamondTrap &x)
 {
-	ost << "DiamondTrap[" << (ClapTrap)x << "]";
+	ost << "DiamondTrap[Base=" << static_cast<const ClapTrap&>(x) << "]";
 	return ost;
 }

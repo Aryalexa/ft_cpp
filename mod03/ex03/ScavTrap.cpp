@@ -46,6 +46,6 @@ void ScavTrap::guardGate()
 
 std::ostream &operator<<(std::ostream &ost, const ScavTrap &x)
 {
-	ost << "ScavTrap[" << (ClapTrap)x << "]";
+	ost << "ScavTrap[" << static_cast<const ClapTrap&>(x) << "]";
 	return ost;
 }

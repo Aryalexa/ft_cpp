@@ -34,6 +34,6 @@ void FragTrap::highFivesGuys(void)
 }
 std::ostream &operator<<(std::ostream &ost, const FragTrap &x)
 {
-	ost << "FragTrap[" << (ClapTrap)x << "]";
+	ost << "FragTrap[" << static_cast<const ClapTrap&>(x) << "]";
 	return ost;
 }

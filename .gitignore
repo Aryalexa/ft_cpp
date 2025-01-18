@@ -19,6 +19,9 @@ bsp
 # mod03
 trap
 
+#mod04
+animals
+
 # Prerequisites
 *.d
 . << std::endl;
