@@ -23,6 +23,9 @@ trap
 animals
 materia
 
+#mod05
+bureau
+
 # Prerequisites
 *.d
 . << std::endl;
