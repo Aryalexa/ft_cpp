@@ -11,8 +11,8 @@ int main(int argn, char *argv[])
 	}
 	
 	// in ----
-	char *&filename = argv[1];
-	std::ifstream fin(filename, std::ios::in); // fstream
+	std::string filename = argv[1];
+	std::ifstream fin(filename.c_str(), std::ios::in); // fstream
 	if (!fin)
 	{
 		std::cout << "Error. " << filename << " not found or allowed" << std::endl;
@@ -20,19 +20,17 @@ int main(int argn, char *argv[])
 	}
 
 	// out ---
-	std::string newFilename;
-	newFilename += filename;		// append +=
-	newFilename.append(".replace"); // append()
+	std::string newFilename = filename.append(".replace");
 	std::ofstream fout;
-	fout.open(newFilename, std::ios::out | std::ios::trunc); // fstream
+	fout.open(newFilename.c_str(), std::ios::out | std::ios::trunc); // fstream
 	if (!fout)
 	{
 		std::cout << newFilename << " could not be created" << std::endl;
-		return (2);	
+		return (3);	
 	}	
 
 	// reading and replacing
-	std::string str1 = std::string(argv[2]);
+	std::string str1 = argv[2];
 	char *&str2 = argv[3];
 	std::string line;
 	size_t pos;

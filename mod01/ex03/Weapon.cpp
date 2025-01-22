@@ -19,6 +19,6 @@ Weapon::~Weapon()
 const std::string &Weapon::getType() const {
 	return type;
 }
-void Weapon::setType(std::string newType) {
+void Weapon::setType(const std::string &newType) {
 	type = newType;
 }

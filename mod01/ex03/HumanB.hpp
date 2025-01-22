@@ -13,6 +13,7 @@ private:
 public:
 	HumanB(std::string name);
 	~HumanB();
+	
 	void setWeapon(Weapon &newWeapon);
 	void attack();
 };

@@ -3,10 +3,12 @@
 int main ()
 {
 	Zombie *zs;
-	int N = 4;
+	int N = 5;
 	zs = zombieHorde(N, "hippieZombie33");
+	
 	for (int i = 0; i < N; ++i)
-		zs->announce();
+		zs[i].announce();
+	
 	delete [] zs;
 
 	return 0;
