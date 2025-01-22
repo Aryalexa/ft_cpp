@@ -106,9 +106,9 @@ void	Account::_displayTimestamp( void )
     std::tm* localTime = std::localtime(&now);
 
 	std::cout << "[" << localTime->tm_year + 1900;
-	if (localTime->tm_mon < 10)
+	if (localTime->tm_mon + 1 < 10)
 		std::cout << "0";
-	std::cout << localTime->tm_mon;
+	std::cout << localTime->tm_mon + 1;
 	
 	if (localTime->tm_mday < 10)
 		std::cout << "0";
