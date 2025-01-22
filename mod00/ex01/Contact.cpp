@@ -40,6 +40,11 @@ std::string Contact::readField(std::string fieldName)
 	
 	std::cout << "\t" << fieldName << ": ";
 	std::cin >> fieldValue;
+	if (std::cin.eof())
+	{
+		std::cout << "bad input" << std:: endl;
+		exit(1);
+	}
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 	return fieldValue;

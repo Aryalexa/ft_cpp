@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "PhoneBook.hpp"
+#include <stdlib.h>
 
 enum Instruction {
     IAdd,
@@ -19,6 +20,13 @@ Instruction getInstruction()
 		valid_instr = true;
 		std::cout << "Introduce instruction: ";
 		std::cin >> input;
+		if (std::cin.eof())
+		{
+			// std::cin.clear(); // reset error state of std::in
+			// std::cin.ignore(1000, '\n'); //discard invalid chars in the input buffer..
+			std::cout << "bad input" << std:: endl;
+			exit(1);
+		}
 		if (input == "ADD")
 			return IAdd;
 		if (input == "SEARCH")
@@ -36,6 +44,11 @@ int readIndex(size_t numValues)
 	std::cout << "Index of the contact you want to see: ";
 	// check input and range
 	while (!(std::cin >> i) || !(i >= 0 && i < numValues)) {
+		if (std::cin.eof())
+		{
+			std::cout << "bad input" << std:: endl;
+			exit(1);
+		}
 		std::cin.clear(); // reset error state of std::in
 		std::cin.ignore(1000, '\n'); //discard invalid chars in the input buffer..
 		// ..up to a newline, preventing an infinite loop
