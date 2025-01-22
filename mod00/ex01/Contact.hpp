@@ -16,7 +16,6 @@ private:
 	std::string phoneNumber;
 	std::string darkestSecret;
 
-protected:
 	static std::string readField(std::string fieldName);
 	static std::string readFieldLine(std::string fieldName);
 

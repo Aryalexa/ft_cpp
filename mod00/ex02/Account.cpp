@@ -92,7 +92,7 @@ void	Account::displayStatus( void ) const {
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";";
 	std::cout << "deposits:" << _nbDeposits << ";";
-	std::cout << "withdrawls:" << _nbWithdrawals << std::endl;
+	std::cout << "withdrawals:" << _nbWithdrawals << std::endl;
 }
 
 
@@ -101,8 +101,29 @@ void	Account::displayStatus( void ) const {
 void	Account::_displayTimestamp( void )
 {
 	// Get the current time
-    std::time_t now = std::time(nullptr);
+    std::time_t now;
+	std::time(&now);
     std::tm* localTime = std::localtime(&now);
-	std::cout << "[" << std::put_time(localTime,"%Y%m%d_%H%M%S") << "] ";
+
+	std::cout << "[" << localTime->tm_year + 1900;
+	if (localTime->tm_mon < 10)
+		std::cout << "0";
+	std::cout << localTime->tm_mon;
+	
+	if (localTime->tm_mday < 10)
+		std::cout << "0";
+	std::cout << localTime->tm_mday << "_";
+	
+	if (localTime->tm_hour < 10)
+		std::cout << "0";
+	std::cout << localTime->tm_hour;
+	
+	if (localTime->tm_min < 10)
+		std::cout << "0";
+	std::cout << localTime->tm_min;
+	
+	if (localTime->tm_sec < 10)
+		std::cout << "0";
+	std::cout << localTime->tm_sec << "] ";
 
 }
