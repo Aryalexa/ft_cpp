@@ -7,7 +7,7 @@ class Fixed
 {
 private:
 	int rawValue;
-	static const int W; // number of fractional bits
+	static const int W = 8; // number of fractional bits
 
 public:
 	// 1. defualt constructor

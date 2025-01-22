@@ -1,6 +1,14 @@
 #include "Point.hpp"
 #include <iostream>
 
+
+const std::string inOrOut(const bool &b)
+{
+	if (b)
+		return "in";
+	return "out";
+}
+
 int main( void ) {
 	
 	Point a(0,0);
@@ -26,13 +34,13 @@ int main( void ) {
 	Point s(3,-1);
 	Point t(-5,-1);
 
-	std::cout << a << " vertex: " <<(!bsp(a, b, c, a) ? "ok" : "fail") << std::endl;
-	std::cout << p << " edge: " << (!bsp(a, b, c, p) ? "ok" : "fail") << std::endl;
-	std::cout << p2 << " edge 2: " << (!bsp(a, b, c, p2) ? "ok" : "fail") << std::endl;
-	std::cout << q << " inside: " << (bsp(a, b, c, q) ? "ok" : "fail") << std::endl;
-	std::cout << r << " inside: " << (bsp(a, b, c, r) ? "ok" : "fail") << std::endl;
-	std::cout << s << " outside in line: " << (!bsp(a, b, c, s) ? "ok" : "fail") << std::endl;
-	std::cout << t << " outside random: " << (!bsp(a, b, c, t) ? "ok" : "fail") << std::endl;
+	std::cout << a << " vertex: " << inOrOut(bsp(a, b, c, a)) << std::endl;
+	std::cout << p << " edge: " << inOrOut(bsp(a, b, c, p)) << std::endl;
+	std::cout << p2 << " edge 2: " << inOrOut(bsp(a, b, c, p2)) << std::endl;
+	std::cout << q << " inside: " << inOrOut(bsp(a, b, c, q)) << std::endl;
+	std::cout << r << " inside: " << inOrOut(bsp(a, b, c, r)) << std::endl;
+	std::cout << s << " outside in line: " << inOrOut(bsp(a, b, c, s)) << std::endl;
+	std::cout << t << " outside random: " << inOrOut(bsp(a, b, c, t)) << std::endl;
 	std::cout << std::endl;
 
 	return 0;

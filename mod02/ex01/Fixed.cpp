@@ -1,7 +1,7 @@
 
 #include "Fixed.hpp"
 
-const int Fixed::W = 8; // number of fractional bits
+//const int Fixed::W = 8; // number of fractional bits
 
 Fixed::Fixed(): rawValue(0)
 {
@@ -40,7 +40,7 @@ Fixed::Fixed(const int i) : rawValue(i << W)
 {
 	std::cout << "Int constructor called" << std::endl;	
 }
-Fixed::Fixed(const float fp) : rawValue(std::roundf(fp * (1 << W)))
+Fixed::Fixed(const float fp) : rawValue(roundf(fp * (1 << W)))
 {
 	std::cout << "Float constructor called" << std::endl;	
 }

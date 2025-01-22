@@ -46,7 +46,7 @@ Fixed::Fixed(const int i) : rawValue(i << W)
 {
 	// std::cout << "Int constructor called" << std::endl;	
 }
-Fixed::Fixed(const float fp) : rawValue(std::roundf(fp * (1 << W)))
+Fixed::Fixed(const float fp) : rawValue(roundf(fp * (1 << W)))
 {
 	// std::cout << "Float constructor called" << std::endl;	
 }
@@ -114,6 +114,11 @@ Fixed Fixed::operator*(const Fixed &other) const
 }
 Fixed Fixed::operator/(const Fixed &other) const
 {
+	if (other.toFloat() == 0)
+	{
+		std::cout << "div by zero exception (-1 was returned)" << std::endl;
+		return Fixed(-1);
+	}
 	return Fixed(this->toFloat() / other.toFloat());
 }
 
