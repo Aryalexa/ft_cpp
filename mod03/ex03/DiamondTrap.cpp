@@ -12,7 +12,7 @@ DiamondTrap::DiamondTrap(const std::string name):
 	std::cout << "DiamondTrap constructor with args()" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other), name(other.name)
 {
 	std::cout << "DiamondTrap copy constructor()" << std::endl;
 }

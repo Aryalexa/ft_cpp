@@ -3,6 +3,16 @@
 
 int main()
 {
+	{
+		DiamondTrap diaE("EE");
+		DiamondTrap diaEC;
+		diaEC = diaE;
+		DiamondTrap diaEC2 = diaE;
+		std::cout << diaE << std::endl;
+		std::cout << diaEC << std::endl;
+		std::cout << diaEC2 << std::endl;
+	}
+	std::cout << "--------------------------------" << std::endl;
 	DiamondTrap cp_a("AA");
 	DiamondTrap cp_b("BB");
 	DiamondTrap robot_c("SS");
@@ -27,4 +37,5 @@ int main()
 	cp_b.whoAmI();
 	robot_c.whoAmI();
 	robot_d.whoAmI();
+
 }
