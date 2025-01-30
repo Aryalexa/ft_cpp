@@ -4,38 +4,36 @@
 int main()
 {
 	{
-		DiamondTrap diaE("EE");
-		DiamondTrap diaEC;
-		diaEC = diaE;
-		DiamondTrap diaEC2 = diaE;
-		std::cout << diaE << std::endl;
-		std::cout << diaEC << std::endl;
-		std::cout << diaEC2 << std::endl;
+		DiamondTrap dia_e("EE");
+		DiamondTrap dia_e1;
+		dia_e1 = dia_e;
+		std::cout << "copy" << std::endl;
+		DiamondTrap dia_e2 = dia_e;
+		std::cout << "print" << std::endl;
+		std::cout << dia_e << std::endl;
+		std::cout << dia_e1 << std::endl;
+		std::cout << dia_e2 << std::endl;
 	}
 	std::cout << "--------------------------------" << std::endl;
-	DiamondTrap cp_a("AA");
-	DiamondTrap cp_b("BB");
-	DiamondTrap robot_c("SS");
-	DiamondTrap robot_d("TT");
-	std::cout << cp_a << std::endl;
-	std::cout << cp_b << std::endl;
-	std::cout << robot_c << std::endl;
-	std::cout << robot_d << std::endl;
 
-	robot_d.attack(robot_c.getName());
-	robot_c.takeDamage(robot_d.getAttackDamage());
-	std::cout << robot_c << std::endl;
-	std::cout << robot_d << std::endl;
+	DiamondTrap dc("CC");
+	DiamondTrap dd("DD");
+
+	std::cout << dc << std::endl;
+	std::cout << dd << std::endl;
+
+	dd.attack(dc.getName());
+	dc.takeDamage(dd.getAttackDamage());
+	std::cout << dc << std::endl;
+	std::cout << dd << std::endl;
 	
-	robot_c.beRepaired(3);
-	robot_d.beRepaired(3);
-	std::cout << robot_c << std::endl;
-	std::cout << robot_d << std::endl;
-	robot_c.guardGate();
-	robot_d.highFivesGuys();
-	cp_a.whoAmI();
-	cp_b.whoAmI();
-	robot_c.whoAmI();
-	robot_d.whoAmI();
+	dc.beRepaired(3);
+	dd.beRepaired(3);
+	std::cout << dc << std::endl;
+	std::cout << dd << std::endl;
+	dc.guardGate();
+	dd.highFivesGuys();
+	dc.whoAmI();
+	dd.whoAmI();
 
 }
