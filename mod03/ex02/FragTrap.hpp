@@ -10,7 +10,14 @@ public:
 	FragTrap();
 	FragTrap(const std::string name);
 	FragTrap(const FragTrap &other);
-	FragTrap &operator=(const FragTrap &other);
 	~FragTrap();
+
+	FragTrap &operator=(const FragTrap &other);
+	
 	void highFivesGuys(void);
+
+	const std::string toString() const;
+
 };
+
+std::ostream &operator<<(std::ostream &ost, const FragTrap &x);

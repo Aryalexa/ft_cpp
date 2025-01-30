@@ -3,7 +3,7 @@
 #include "FragTrap.hpp"
 
 
-FragTrap::FragTrap(): ClapTrap("frag-no-name")
+FragTrap::FragTrap(): ClapTrap("frag-no-name", 100, 100, 30)
 {
 	std::cout << "FragTrap default constructor()" << std::endl;
 }
@@ -21,10 +21,7 @@ FragTrap &FragTrap::operator=(const FragTrap &other)
 
 	if (this != &other)
 	{
-		name = other.name;
-		hit_points = other.hit_points;
-		energy_points = other.energy_points;
-		attack_damage = other.attack_damage;
+		ClapTrap::operator=(other);
 	}
 	return *this;
 }
@@ -37,3 +34,18 @@ void FragTrap::highFivesGuys(void)
 	std::cout << "FragTrap " << name << ": Gimme five!" << std::endl;
 }
 
+const std::string FragTrap::toString() const
+{
+	using std::string;
+	string str = "FragTrap";
+	str += "[base=";
+	str += ClapTrap::toString();
+	str += "]";
+	return str;
+
+}
+std::ostream &operator<<(std::ostream &ost, const FragTrap &x)
+{
+	ost << x.toString();
+	return ost;
+}
