@@ -3,41 +3,68 @@
 
 int main()
 {
+	using std::cout;
+	using std::endl;
+	// {
+	// 	AAnimal a = AAnimal();
+	// }
 	{
-		std::cout << "Test 🌼1" << std::endl;
+		cout << "Test 🌼1" << endl;
 		const AAnimal* j = new Dog();
 		const AAnimal* i = new Cat();
 		delete j; //should not create a leak
 		delete i;
 	}
 	{
-		std::cout << "Test 🌼2" << std::endl;
+		cout << "Test 🌼2 - pointers" << endl;
 		const AAnimal* j = new Dog(); // pointer
 		const AAnimal* i = new Cat();
-		std::cout << j->getType() << " " << std::endl;
-		std::cout << i->getType() << " " << std::endl;
+		cout << j->getType() << " " << endl;
+		cout << i->getType() << " " << endl;
 		i->makeSound(); // will output the cat sound!
 		j->makeSound();
 		delete j;
 		delete i;
 	}
 	{
-		std::cout << "Test 🌼3" << std::endl;
+		cout << "Test 🌼3 - refs" << endl;
 		Dog dog;
 		Cat cat;
 		AAnimal& ref1 = dog; // reference
 		AAnimal& ref2 = cat;
-		std::cout << dog.getType() << " " << std::endl;
-		std::cout << cat.getType() << " " << std::endl;
+		cout << dog.getType() << " " << endl;
+		cout << cat.getType() << " " << endl;
 		ref1.makeSound(); // will output the dog sound!
 		ref2.makeSound();
 	}
 	{
-		std::cout << "Test 🌼4" << std::endl;
+		cout << "Test 🌼4" << endl;
 		Dog a;
 		a.haveAnIdea("water");
 		a.haveAnIdea("ball");
 		a.showIdeas();
+	}
+	{
+		cout << "Test 🌼5 - deep copy (cat)" << endl;
+		// check deep copies
+		Cat a;
+		a.haveAnIdea("fish");
+		a.haveAnIdea("more fish");
+		a.haveAnIdea("mice");
+		Cat b = a;
+		Cat c;
+		c = b;
+		cout << "BEFORE" << endl;
+		a.showIdeas();
+		b.showIdeas();
+		c.showIdeas();
+		c.haveAnIdea("purr");
+		b.haveAnIdea("food");
+		a.haveAnIdea("go out");
+		cout << "AFTER" << endl;
+		a.showIdeas();
+		b.showIdeas();
+		c.showIdeas();
 	}
 	return 0;
 }

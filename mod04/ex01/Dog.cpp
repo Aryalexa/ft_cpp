@@ -18,9 +18,7 @@ Dog &Dog::operator=(const Dog &other)
 	std::cout << "Dog = operator()" << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
-		delete brain;
-		brain = new Brain;
+		Animal::operator=(other);
 		*brain = *other.brain;
 	}
 	return *this;

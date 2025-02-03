@@ -4,52 +4,54 @@
 
 int main()
 {
+	using std::cout;
+	using std::endl;
 	{
-		Animal a;
-		a = Animal("other");
+		cout << "🌼 TEST 1" << endl;
+		Animal a; // default
+		a = Animal("other"); // assignment
+		cout << "a type: " << a.getType() << " " << endl;
+		a.makeSound();
+
+		Animal b; // default
+		cout << "b type: " << b.getType() << " " << endl;
+		b.makeSound();
 	}
-	std::cout << std::endl;
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog(); // pointer
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	j->makeSound();
-	i->makeSound(); // will output the cat sound!
-	meta->makeSound();	
-	delete meta;
-	delete j;
-	delete i;
-	if (1)
 	{
-		std::cout << std::endl;
-		const WrongAnimal* meta = new WrongAnimal();
-		const Animal* j = new Dog(); // pointer
-		const WrongAnimal* i = new WrongCat();
-		std::cout << j->getType() << " " << std::endl;
-		std::cout << i->getType() << " " << std::endl;
-		j->makeSound();
-		i->makeSound(); // will output the cat sound!
+		cout << "🌼 TEST 2 - pointers" << endl;
+		const Animal* meta = new Animal();
+		const Animal* dog = new Dog(); // pointer
+		const Animal* cat = new Cat();
+		cout << dog->getType() << " " << endl;
+		cout << cat->getType() << " " << endl;
+		dog->makeSound();
+		cat->makeSound(); // will output the cat sound!
 		meta->makeSound();	
 		delete meta;
-		delete j;
-		delete i;
+		delete dog;
+		delete cat;
 	}
-	std::cout << std::endl;
 	{
+		cout << "🌼 TEST 3 - wrong pointers" << endl;
+		const WrongAnimal* wcat = new WrongCat();
+		cout << wcat->getType() << " " << endl;
+		wcat->makeSound(); // will output the cat sound!
+		delete wcat;
+	}
+	{
+		cout << "🌼 TEST 4 - references" << endl;
+
 		Dog dog;
 		Cat cat;
-		Animal& ref1 = dog; // reference
-		Animal& ref2 = cat;
-		std::cout << dog.getType() << " " << std::endl;
-		std::cout << cat.getType() << " " << std::endl;
-		ref1.makeSound(); // will output the dog sound!
-		ref2.makeSound();
+		Animal& rdog = dog; // reference
+		Animal& rcat = cat;
+		cout << dog.getType() << " " << endl;
+		cout << cat.getType() << " " << endl;
+		rdog.makeSound(); // will output the dog sound!
+		rcat.makeSound();
 	}
-	std::cout << std::endl;
-	Animal animal;
-	std::cout << animal.getType() << " " << std::endl;
-	animal.makeSound();
+
+	
 	
 	return 0;
 }

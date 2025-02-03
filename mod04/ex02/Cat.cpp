@@ -16,9 +16,7 @@ Cat &Cat::operator=(const Cat &other)
 	std::cout << "Cat = operator()" << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
-		delete brain;
-		brain = new Brain;
+		AAnimal::operator=(other);
 		*brain = *other.brain;
 	}
 	return *this;

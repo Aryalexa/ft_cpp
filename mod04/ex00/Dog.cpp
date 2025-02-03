@@ -1,6 +1,4 @@
-
 #include "Dog.hpp"
-
 
 Dog::Dog(): Animal("Dog")
 {
@@ -16,7 +14,7 @@ Dog &Dog::operator=(const Dog &other)
 	std::cout << "Dog = operator()" << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
+		Animal::operator=(other);
 	}
 	return *this;
 }
@@ -26,5 +24,19 @@ Dog::~Dog()
 }
 void Dog::makeSound() const
 {
-	std::cout << "Dog barks." << std::endl;
+	std::cout << "Dog barks!" << std::endl;
+}
+
+const std::string Dog::toString() const
+{
+	std::ostringstream ss;
+
+	ss << "Dog()";
+	return ss.str();
+}
+
+std::ostream &operator<<(std::ostream &ost, const Dog &x)
+{
+	ost << x.toString();
+	return ost;
 }

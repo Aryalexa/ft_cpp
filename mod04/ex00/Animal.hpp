@@ -2,6 +2,8 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
+
 
 class Animal
 {
@@ -16,4 +18,9 @@ public:
 
 	const std::string &getType() const;
 	virtual void makeSound() const;
+
+	virtual const std::string toString() const;
+
 };
+
+std::ostream &operator<<(std::ostream &ost, const Animal &x);

@@ -14,7 +14,7 @@ Cat &Cat::operator=(const Cat &other)
 	std::cout << "Cat = operator()" << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
+		Animal::operator=(other);
 	}
 	return *this;
 }
@@ -24,5 +24,19 @@ Cat::~Cat()
 }
 void Cat::makeSound() const
 {
-	std::cout << "Cat meows." << std::endl;
+	std::cout << "Cat meows!" << std::endl;
+}
+
+const std::string Cat::toString() const
+{
+	std::ostringstream ss;
+
+	ss << "Cat()";
+	return ss.str();
+}
+
+std::ostream &operator<<(std::ostream &ost, const Cat &x)
+{
+	ost << x.toString();
+	return ost;
 }

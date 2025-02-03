@@ -3,32 +3,36 @@
 
 int main()
 {
+	using std::cout;
+	using std::endl;
 	{
-		std::cout << "Test 🌼1" << std::endl;
-		const Animal* j = new Dog();
-		const Animal* i = new Cat();
-		delete j; //should not create a leak
-		delete i;
+		cout << "Test 🌼1 - pointers, leaks" << endl;
+		const Animal* dog = new Dog();
+		const Animal* cat = new Cat();
+		delete dog; //should not create a leak
+		delete cat;
 	}
 	{
-		std::cout << "Test 🌼2" << std::endl;
+		cout << "Test 🌼2 - array of animals" << endl;
 		const int N = 10;
 		// array of animal pointers
 		Animal* arr[N];
 		for (int i = 0; i < N; i+=2)
 		{
-			std::cout << i << std::endl;
+			cout << i << endl;
 			arr[i] = new Cat();
 			arr[i+1] = new Dog();
 		}
 		for (int i = 0; i < N; ++i)
+			arr[i]->makeSound();
+		for (int i = 0; i < N; ++i)
 		{
-			std::cout << i << std::endl;
+			cout << i << endl;
 			delete arr[i];
 		}
 	}
 	{
-		std::cout << "Test 🌼3" << std::endl;
+		cout << "Test 🌼3 - deep copy (cat)" << endl;
 		// check deep copies
 		Cat a;
 		a.haveAnIdea("fish");
@@ -37,31 +41,31 @@ int main()
 		Cat b = a;
 		Cat c;
 		c = b;
-		std::cout << "BEFORE" << std::endl;
+		cout << "BEFORE" << endl;
 		a.showIdeas();
 		b.showIdeas();
 		c.showIdeas();
 		c.haveAnIdea("purr");
 		b.haveAnIdea("food");
 		a.haveAnIdea("go out");
-		std::cout << "AFTER" << std::endl;
+		cout << "AFTER" << endl;
 		a.showIdeas();
 		b.showIdeas();
 		c.showIdeas();
 	}
 	{
-		std::cout << "Test 🌼4" << std::endl;
-		// check deep copies
+		cout << "Test 🌼4 - deep copy (dog)" << endl;
+
 		Dog a;
 		a.haveAnIdea("water");
 		a.haveAnIdea("ball");
 		Dog b(a);
-		std::cout << "BEFORE" << std::endl;
+		cout << "BEFORE" << endl;
 		a.showIdeas();
 		b.showIdeas();
 		a.haveAnIdea("go out");
 		b.haveAnIdea("food");
-		std::cout << "AFTER" << std::endl;
+		cout << "AFTER" << endl;
 		a.showIdeas();
 		b.showIdeas();
 	}

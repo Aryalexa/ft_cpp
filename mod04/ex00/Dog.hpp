@@ -13,4 +13,9 @@ public:
 	Dog &operator=(const Dog &other);
 	~Dog();
 	void makeSound() const;
+
+	const std::string toString() const;
+
 };
+
+std::ostream &operator<<(std::ostream &ost, const Animal &x);

@@ -18,7 +18,7 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
 	std::cout << "WrongAnimal = operator()" << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
+		WrongAnimal::operator=(other);
 	}
 	return *this;
 }
