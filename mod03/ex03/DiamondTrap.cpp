@@ -33,6 +33,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 	if (this != &other)
 	{
 		ClapTrap::operator=(other);
+		name = other.name;
 	}
 	return *this;
 }
