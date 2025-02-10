@@ -26,17 +26,3 @@ void Dog::makeSound() const
 {
 	std::cout << "Dog barks!" << std::endl;
 }
-
-const std::string Dog::toString() const
-{
-	std::ostringstream ss;
-
-	ss << "Dog()";
-	return ss.str();
-}
-
-std::ostream &operator<<(std::ostream &ost, const Dog &x)
-{
-	ost << x.toString();
-	return ost;
-}

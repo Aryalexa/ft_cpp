@@ -14,8 +14,4 @@ public:
 	~Cat();
 	void makeSound() const;
 
-	const std::string toString() const;
-
 };
-
-std::ostream &operator<<(std::ostream &ost, const Animal &x);

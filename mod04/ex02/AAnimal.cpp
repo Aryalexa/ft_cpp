@@ -31,4 +31,3 @@ const std::string &AAnimal::getType() const
 {
 	return type;
 }
-

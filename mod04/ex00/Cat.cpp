@@ -26,17 +26,3 @@ void Cat::makeSound() const
 {
 	std::cout << "Cat meows!" << std::endl;
 }
-
-const std::string Cat::toString() const
-{
-	std::ostringstream ss;
-
-	ss << "Cat()";
-	return ss.str();
-}
-
-std::ostream &operator<<(std::ostream &ost, const Cat &x)
-{
-	ost << x.toString();
-	return ost;
-}

@@ -6,17 +6,17 @@ int main()
 	using std::cout;
 	using std::endl;
 	// {
-	// 	AAnimal a = AAnimal();
+	// 	AAnimal a = AAnimal(); // not possible
 	// }
 	{
-		cout << "Test 🌼1" << endl;
+		cout << "🍁Test 1" << endl;
 		const AAnimal* j = new Dog();
 		const AAnimal* i = new Cat();
 		delete j; //should not create a leak
 		delete i;
 	}
 	{
-		cout << "Test 🌼2 - pointers" << endl;
+		cout << "🍁Test 2 - pointers" << endl;
 		const AAnimal* j = new Dog(); // pointer
 		const AAnimal* i = new Cat();
 		cout << j->getType() << " " << endl;
@@ -27,7 +27,7 @@ int main()
 		delete i;
 	}
 	{
-		cout << "Test 🌼3 - refs" << endl;
+		cout << "🍁Test 3 - refs" << endl;
 		Dog dog;
 		Cat cat;
 		AAnimal& ref1 = dog; // reference
@@ -38,14 +38,14 @@ int main()
 		ref2.makeSound();
 	}
 	{
-		cout << "Test 🌼4" << endl;
+		cout << "🍁Test 4 - ideas" << endl;
 		Dog a;
 		a.haveAnIdea("water");
 		a.haveAnIdea("ball");
 		a.showIdeas();
 	}
 	{
-		cout << "Test 🌼5 - deep copy (cat)" << endl;
+		cout << "🍁Test 5 - deep copy (cat)" << endl;
 		// check deep copies
 		Cat a;
 		a.haveAnIdea("fish");

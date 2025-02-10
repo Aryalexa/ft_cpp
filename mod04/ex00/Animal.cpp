@@ -36,20 +36,3 @@ void Animal::makeSound() const
 {
 	std::cout << "Animal makes sound." << std::endl;
 }
-
-const std::string Animal::toString() const
-{
-	std::ostringstream ss;
-
-	ss << "Animal";
-	ss << "(type=";
-	ss << type;
-	ss << ")";
-	return ss.str();
-}
-
-std::ostream &operator<<(std::ostream &ost, const Animal &x)
-{
-	ost << x.toString();
-	return ost;
-}

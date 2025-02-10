@@ -9,7 +9,7 @@ int main()
 	{
 		cout << "🌼 TEST 1" << endl;
 		Animal a; // default
-		a = Animal("other"); // assignment
+		a = Animal("fantastic animal"); // assignment
 		cout << "a type: " << a.getType() << " " << endl;
 		a.makeSound();
 
@@ -32,7 +32,7 @@ int main()
 		delete cat;
 	}
 	{
-		cout << "🌼 TEST 3 - wrong pointers" << endl;
+		cout << "🌼 TEST 3 - \"wrong\" pointers" << endl;
 		const WrongAnimal* wcat = new WrongCat();
 		cout << wcat->getType() << " " << endl;
 		wcat->makeSound(); // will output the cat sound!
@@ -51,7 +51,5 @@ int main()
 		rcat.makeSound();
 	}
 
-	
-	
 	return 0;
 }

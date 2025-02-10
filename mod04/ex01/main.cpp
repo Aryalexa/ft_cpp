@@ -6,14 +6,14 @@ int main()
 	using std::cout;
 	using std::endl;
 	{
-		cout << "Test 🌼1 - pointers, leaks" << endl;
+		cout << "🌼Test 1 - pointers, leaks" << endl;
 		const Animal* dog = new Dog();
 		const Animal* cat = new Cat();
 		delete dog; //should not create a leak
 		delete cat;
 	}
 	{
-		cout << "Test 🌼2 - array of animals" << endl;
+		cout << "🌼Test 2 - array of animals" << endl;
 		const int N = 10;
 		// array of animal pointers
 		Animal* arr[N];
@@ -32,7 +32,7 @@ int main()
 		}
 	}
 	{
-		cout << "Test 🌼3 - deep copy (cat)" << endl;
+		cout << "🌼Test 3 - deep copy (cat)" << endl;
 		// check deep copies
 		Cat a;
 		a.haveAnIdea("fish");
@@ -54,7 +54,7 @@ int main()
 		c.showIdeas();
 	}
 	{
-		cout << "Test 🌼4 - deep copy (dog)" << endl;
+		cout << "🌼Test 4 - deep copy (dog)" << endl;
 
 		Dog a;
 		a.haveAnIdea("water");
