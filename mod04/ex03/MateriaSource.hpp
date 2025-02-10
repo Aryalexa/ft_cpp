@@ -7,9 +7,10 @@
 class MateriaSource : public IMateriaSource
 {
 private:
-	static const int MEMCAP = 4; // mem max capacity
-	AMateria* memory[MEMCAP];
-	int mem_occ;
+	static const int MEM_MAX = 4; // mem max capacity
+	AMateria* memory[MEM_MAX];
+	int mem_cnt;
+
 public:
 	MateriaSource();
 	MateriaSource(const MateriaSource &other);

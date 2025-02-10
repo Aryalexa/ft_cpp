@@ -3,24 +3,24 @@
 
 Cure::Cure(): AMateria("cure")
 {
-	std::cout << CYAN "Cure default constructor()" RESET << std::endl;
+	std::cout << CYAN "🩹Cure default constructor()" RESET << std::endl;
 }
 Cure::Cure(const Cure &other): AMateria(other.AMateria::type)
 {
-	std::cout << CYAN "Cure copy constructor()" RESET << std::endl;
+	std::cout << CYAN "🩹Cure copy constructor()" RESET << std::endl;
 }
 Cure &Cure::operator=(const Cure &other)
 {
-	std::cout << CYAN "Cure = operator()" RESET << std::endl;
+	std::cout << CYAN "🩹Cure operator=()" RESET << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
+		AMateria::operator=(other);
 	}
 	return *this;
 }
 Cure::~Cure()
 {
-	std::cout << MAGENTA "Cure destructor()" RESET << std::endl;
+	std::cout << MAGENTA "🩹Cure destructor()" RESET << std::endl;
 }
 AMateria* Cure::clone() const
 {

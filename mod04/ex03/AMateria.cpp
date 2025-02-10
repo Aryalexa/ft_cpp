@@ -15,7 +15,7 @@ AMateria::AMateria(const AMateria &other): type(other.type)
 }
 AMateria &AMateria::operator=(const AMateria &other)
 {
-	std::cout << CYAN "AMateria = operator()" RESET << std::endl;
+	std::cout << CYAN "AMateria operator=()" RESET << std::endl;
 	if (this != &other)
 	{
 		type = other.type;
@@ -25,7 +25,6 @@ AMateria &AMateria::operator=(const AMateria &other)
 AMateria::~AMateria()
 {
 	std::cout << MAGENTA "AMateria destructor()" RESET << std::endl;
-
 }
 std::string const & AMateria::getType() const
 {

@@ -3,24 +3,24 @@
 
 Ice::Ice() : AMateria("ice")
 {
-	std::cout << CYAN "Ice default constructor()" RESET << std::endl;
+	std::cout << CYAN "🧊Ice default constructor()" RESET << std::endl;
 }
 Ice::Ice(const Ice &other): AMateria(other.AMateria::type)
 {
-	std::cout << CYAN "Ice copy constructor()" RESET << std::endl;
+	std::cout << CYAN "🧊Ice copy constructor()" RESET << std::endl;
 }
 Ice &Ice::operator=(const Ice &other)
 {
-	std::cout << CYAN "Ice = operator()" RESET << std::endl;
+	std::cout << CYAN "🧊Ice operator=()" RESET << std::endl;
 	if (this != &other)
 	{
-		type = other.type;
+		AMateria::operator=(other);
 	}
 	return *this;
 }
 Ice::~Ice()
 {
-	std::cout << MAGENTA "Ice destructor()" RESET << std::endl;
+	std::cout << MAGENTA "🧊Ice destructor()" RESET << std::endl;
 }
 AMateria* Ice::clone() const
 {

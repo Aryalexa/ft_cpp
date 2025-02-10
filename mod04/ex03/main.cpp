@@ -23,6 +23,7 @@ void testSource()
 	delete originalIce;
 	delete originalCure;
 
+	std::cout << "create..." << std::endl;
 	AMateria* tmp;
 	tmp = src->createMateria("ice");
 	AMateria* tmp2;
@@ -39,8 +40,8 @@ void testChars()
 	/**
 	 * equip, unequip, use
 	 */
-	ICharacter* me = new Character("me");
-	ICharacter* bob = new Character("bob");
+	ICharacter* em = new Character("EMILY");
+	ICharacter* bob = new Character("BOB");
 
 	AMateria *m0 = new Ice();
 	AMateria *m1 = new Ice();
@@ -49,27 +50,27 @@ void testChars()
 	AMateria *floor_objs[100];
 	int objs = 0;
 
-	me->equip(m0);
-	me->showInventory();
-	me->use(0, *bob);
+	em->equip(m0);
+	em->showInventory();
+	em->use(0, *bob);
 
-	me->equip(m1);
-	me->equip(m2);
-	me->showInventory();
+	em->equip(m1);
+	em->equip(m2);
+	em->showInventory();
 
-	me->unequip(1);
+	em->unequip(1);
 	floor_objs[objs++] = m1; // you cannot pick them up again!
-	me->showInventory();
+	em->showInventory();
 
-	me->use(1, *bob);
+	em->use(1, *bob);
 
 	delete bob;
-	delete me;
+	delete em;
+	std::cout << "---" << std::endl;
 	for (int i = 0; i < objs; ++i)
 	{
 		delete floor_objs[i];
 	}
-	std::cout << " ---" << std::endl;
 
 
 }
@@ -78,7 +79,7 @@ void testCharsCopy()
 	/**
 	 * coping chars
 	 */
-	Character* me = new Character("me");
+	Character* sally = new Character("SALLY");
 
 	AMateria *m0 = new Ice();
 	AMateria *m1 = new Ice();
@@ -90,22 +91,22 @@ void testCharsCopy()
 	// AMateria *floor_objs[100];
 	// int objs = 0;
 
-	me->equip(m0);
-	me->equip(m3);
-	me->showInventory();
+	sally->equip(m0);
+	sally->equip(m3);
+	sally->showInventory();
 	
-	Character *gary = new Character(*me); // gary is a copy of me
-	gary->setName("Gary");
+	Character *gary = new Character(*sally); // gary is a copy of me
+	gary->setName("GARY");
 	gary->showInventory();
 	gary->equip(m1);
 	gary->equip(m2);
 	gary->showInventory();
 
-	me->equip(m4);
-	me->equip(m5);
-	me->showInventory();
+	sally->equip(m4);
+	sally->equip(m5);
+	sally->showInventory();
 	
-	delete me;
+	delete sally;
 	delete gary;
 }
 
@@ -123,27 +124,40 @@ void fixed_example()
 	delete cure;
 	//
 
-	ICharacter* me = new Character("me");
+	std::cout << "--- create Billy and equip him" << std::endl;
+	ICharacter* bill = new Character("BILLY");
 
-	// the reference is lost so we better do not unequip!
+	// the reference is lost so we better do not unequip! (the tmp)
 	AMateria* tmp;
 	tmp = src->createMateria("ice");
-	me->equip(tmp);
+	bill->equip(tmp);
 	tmp = src->createMateria("cure");
-	me->equip(tmp);
+	bill->equip(tmp);
 
-	ICharacter* bob = new Character("bob");
-	me->use(0, *bob);
-	me->use(1, *bob);
+	std::cout << "--- Bobby" << std::endl;
+	ICharacter* bob = new Character("BOBBY");
+	bill->use(0, *bob);
+	bill->use(1, *bob);
 	delete bob;
-	delete me;
+	delete bill;
 	delete src;
 }
 int main()
 {
-	// testSource();
-	//testChars();
-	//testCharsCopy();
+	using std::cout;
+	using std::endl;
+
+	
+	cout << endl << "TEST: source 🍁" << endl;
+	testSource();
+
+	cout << endl << "TEST: chars 🍁" << endl;
+	testChars();
+
+	cout << endl << "TEST: chars deep copy 🍁" << endl;
+	testCharsCopy();
+
+	cout << endl << "TEST: example 🍁" << endl;
 	fixed_example();
 
 	return 0;

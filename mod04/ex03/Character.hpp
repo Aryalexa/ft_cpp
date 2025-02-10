@@ -7,10 +7,11 @@
 class Character : public ICharacter
 {
 private:
-	static const int INV_CAP = 4;
 	std::string name;
-	AMateria* inventory[INV_CAP];
-	int inv_occ;
+
+	static const int INV_MAX = 4;
+	AMateria* inventory[INV_MAX];
+	int inv_cnt;
 public:
 	Character();
 	Character(const std::string &name);
