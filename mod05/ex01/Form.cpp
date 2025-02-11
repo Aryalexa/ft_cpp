@@ -1,8 +1,8 @@
 #include "Form.hpp"
-#include "Bureaucrat.hpp"
+
 Form::Form(): _name("empty"), _isSigned(false), _gradeToSign(0), _gradeToExec(0)
 {
-	// no valid
+	// not valid
 }
 Form::Form(std::string name, int gradeToSign, int gradeToExec):
 	_name(name), _isSigned(false), 
@@ -48,20 +48,28 @@ int Form::getGradetoExec() const
 	return _gradeToExec;
 }
 
-const char* Form::GradeTooHighException::what() const _NOEXCEPT
+const char* Form::GradeTooHighException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
 {
 	return "Grade too high.";
 }
-const char* Form::GradeTooLowException::what() const _NOEXCEPT
+const char* Form::GradeTooLowException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
 {
 	return "Grade too low.";
 }
 
+const std::string Form::toString() const
+{
+	std::ostringstream ss;
+
+	std::string s = getIsSigned()? "signed" : "not signed";
+	ss << getName() << " form"
+		<< " (" << s << "/S:"<< getGradetoSign() << "/E:" << getGradetoExec() << ")";
+	return ss.str();
+}
+
 std::ostream &operator<<(std::ostream &out, const Form &f)
 {
-	std::string s = f.getIsSigned()? "signed" : "not signed";
-	out << f.getName() << " form"
-		<< " (" << s << "/"<< f.getGradetoSign() << "/" << f.getGradetoExec() << ")";
+	out << f.toString();
 	return out;
 }
 
