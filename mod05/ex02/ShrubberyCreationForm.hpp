@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {
@@ -9,12 +10,14 @@ private:
 
     ShrubberyCreationForm();
     ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
+
+protected:
+    void doExecute(Bureaucrat const & executor) const;
+
 public:
     ShrubberyCreationForm(const std::string &target);
     ShrubberyCreationForm(const ShrubberyCreationForm &other);
     ~ShrubberyCreationForm();
-
-    void execute(Bureaucrat const & executor) const;
 };
 
 

@@ -22,20 +22,21 @@ public:
 	Form(const Form &other);
 	~Form();
 
-	// getters
-	const std::string &getName() const;
-	bool getIsSigned() const;
-	int getGradetoSign() const;
-	int getGradetoExec() const;
-	const std::string toString() const;
-
 	void beSigned(const Bureaucrat &b);
 
+	// getters
+	const std::string &getName() const;
+	bool	getIsSigned() const;
+	int		getGradetoSign() const;
+	int		getGradetoExec() const;
+	const std::string toString() const;
+
+	// exceptions
 	class GradeTooHighException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW;
+		const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW;
+		const char* what() const throw();
 	};
 };
 std::ostream &operator<<(std::ostream &out, const Form &f);

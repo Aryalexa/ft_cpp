@@ -1,6 +1,6 @@
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
@@ -9,18 +9,37 @@ int main()
 	try
 	{
 		/* do some stuff with bureaucrats */
-		Bureaucrat b1("Fe", 34);
-		cout << b1 << " created." << endl;
-		b1.decrementGrade();
-		cout << b1 << " modified." << endl;
+		Bureaucrat sam("Sam", 33);
+		cout << sam << " created." << endl;
+		Bureaucrat gabi("Gabi", 140);
+		cout << gabi << " created." << endl;
+
+		AForm *form = NULL;
 		
-		AForm f1("New Park", 30, 20);
-		cout << "new form: " << f1 << endl;
-		AForm f2("New Trash", 122, 80);
-		cout << "new form: " << f2 << endl;
-		b1.signForm(f1);
-		b1.signForm(f2);
-		
+		cout << endl;
+		form = new ShrubberyCreationForm("Saint Williams");
+		cout << "New form: " << *form << endl;
+		cout << sam << " tries to sign " << *form << endl;
+		sam.signForm(*form);
+		cout << sam << " tries to execute " << *form << endl;
+		sam.executeForm(*form);
+
+		cout << endl;
+		form = new ShrubberyCreationForm("NOTsigned");
+		cout << "New form: " << *form << endl;
+		cout << sam << " tries to execute " << *form << endl;
+		sam.executeForm(*form);
+
+		cout << endl;
+		form = new ShrubberyCreationForm("Peterson");
+		cout << "New form: " << *form << endl;
+		cout << gabi << " tries to sign " << *form << endl;
+		gabi.signForm(*form);
+		cout << gabi << " tries to execute " << *form << endl;
+		gabi.executeForm(*form);
+
+		delete form;
+
 	}
 	catch (std::exception & e)
 	{

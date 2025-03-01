@@ -15,10 +15,12 @@ int main()
 		cout << b1 << " modified." << endl;
 		
 		Form f1("New Park", 30, 20);
-		cout << "new form: " << f1 << endl;
-		Form f2("New Trash", 122, 80);
-		cout << "new form: " << f2 << endl;
+		cout << "New form: " << f1 << endl;
+		Form f2("New Trashcan", 122, 80);
+		cout << "New form: " << f2 << endl;
+		cout << b1 << " tries to sign " << f1 << "..." << endl;
 		b1.signForm(f1);
+		cout << b1 << " tries to sign " << f2 << "..." << endl;
 		b1.signForm(f2);
 		
 	}
@@ -27,6 +29,5 @@ int main()
 		/* handle exception */
 		cout << "Exception: " << e.what() << endl;
 	}
-
 	return 0;
 }

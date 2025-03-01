@@ -56,7 +56,7 @@ const std::string Bureaucrat::toString() const
 {
 	std::ostringstream ss;
 
-	ss << getName() << ", bureaucrat grade " << getGrade() << "";
+	ss << getName() << ", bureaucrat grade " << getGrade() << ",";
 	return ss.str();
 }
 
@@ -67,11 +67,11 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &b)
 	return out;
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return "Grade too high.";
 }
-const char* Bureaucrat::GradeTooLowException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
+const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return "Grade too low.";
 }

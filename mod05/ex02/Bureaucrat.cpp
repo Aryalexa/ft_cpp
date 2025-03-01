@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat():
 	_name("empty"), _grade(150)
@@ -71,6 +71,21 @@ void Bureaucrat::signForm(AForm &f) const
 	
 }
 
+void Bureaucrat::executeForm(AForm &f) const
+{
+	try
+	{
+		f.execute(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << *this << " couldn't execute " << f << " because " << e.what() << std::endl;
+		return;
+	}
+	std::cout << *this << " executed " << f << std::endl;
+	
+}
+
 const std::string Bureaucrat::toString() const
 {
 	std::ostringstream ss;
@@ -85,11 +100,11 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &b)
 	return out;
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return "Grade too high.";
 }
-const char* Bureaucrat::GradeTooLowException::what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW
+const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return "Grade too low.";
 }

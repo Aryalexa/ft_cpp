@@ -27,10 +27,11 @@ public:
 	void decrementGrade();
 
 	class GradeTooHighException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW; //_NOEXCEPT;
+		const char* what() const throw();
+		// const char* what() const noexcept; // c++11+
 	};
 	class GradeTooLowException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW; //_NOEXCEPT;
+		const char* what() const throw();
 	};
 
 };

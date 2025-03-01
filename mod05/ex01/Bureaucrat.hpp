@@ -29,10 +29,10 @@ public:
 	void signForm(Form &f) const;
 
 	class GradeTooHighException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW;
+		const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception {
-		const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW;
+		const char* what() const throw();
 	};
 
 };
