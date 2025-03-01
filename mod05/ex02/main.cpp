@@ -1,8 +1,9 @@
 
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
-int main()
+void testShF()
 {
 	using std::cout;
 	using std::endl;
@@ -39,13 +40,49 @@ int main()
 		gabi.executeForm(*form);
 
 		delete form;
-
 	}
 	catch (std::exception & e)
 	{
 		/* handle exception */
 		cout << "Exception: " << e.what() << endl;
 	}
+}
 
+void testRobF()
+{
+	using std::cout;
+	using std::endl;
+	try
+	{
+		/* do some stuff with bureaucrats */
+		Bureaucrat shelly("Shelly", 40);
+		cout << shelly << " created." << endl;
+
+		AForm *form = NULL;
+		
+		cout << endl;
+		form = new RobotomyRequestForm("Randy");
+		cout << "New form: " << *form << endl;
+		cout << shelly << " tries to sign " << *form << endl;
+		shelly.signForm(*form);
+		for (int i = 0; i < 5; ++i)
+		{
+			cout << "Try " << i + 1 << endl; 
+			cout << shelly << " tries to execute " << *form << endl;
+			shelly.executeForm(*form);
+		}
+
+		delete form;
+	}
+	catch (std::exception & e)
+	{
+		/* handle exception */
+		cout << "Exception: " << e.what() << endl;
+	}
+}
+
+int main()
+{
+	testRobF();
 	return 0;
 }
