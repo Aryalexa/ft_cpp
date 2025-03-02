@@ -26,12 +26,14 @@ void testShF()
 		sam.signForm(*form);
 		cout << sam << " tries to execute " << *form << endl;
 		sam.executeForm(*form);
+		delete form;
 
 		cout << endl;
 		form = new ShrubberyCreationForm("Office");
 		cout << "New form: " << *form << endl;
 		cout << sam << " tries to execute " << *form << endl;
 		sam.executeForm(*form);
+		delete form;
 
 		cout << endl;
 		form = new ShrubberyCreationForm("Hospital");
@@ -40,7 +42,6 @@ void testShF()
 		gabi.signForm(*form);
 		cout << gabi << " tries to execute " << *form << endl;
 		gabi.executeForm(*form);
-
 		delete form;
 	}
 	catch (std::exception & e)
@@ -107,12 +108,14 @@ void testPresF()
 		rita.signForm(*form);
 		cout << rita << " tries to execute " << *form << endl;
 		rita.executeForm(*form);
+		delete form;
 
 		cout << endl;
 		form = new PresidentialPardonForm("Lindsey");
 		cout << "New form: " << *form << endl;
 		cout << rita << " tries to execute " << *form << endl;
 		rita.executeForm(*form);
+		delete form;
 
 		cout << endl;
 		form = new PresidentialPardonForm("Logan");
@@ -121,8 +124,8 @@ void testPresF()
 		taylor.signForm(*form);
 		cout << taylor << " tries to execute " << *form << endl;
 		taylor.executeForm(*form);
-
 		delete form;
+
 	}
 	catch (std::exception & e)
 	{
