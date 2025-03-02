@@ -1,6 +1,9 @@
 #pragma once
 
 #include "AForm.hpp"
+#include <cstdlib>  // rand(), srand()
+#include <ctime>    // time()
+#include <unistd.h> // sleep()
 
 class RobotomyRequestForm : public AForm
 {
@@ -11,7 +14,7 @@ private:
     RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
 protected:
-    void doExecute(Bureaucrat const & executor) const;
+    void doExecute() const;
 
 public:
     RobotomyRequestForm(const std::string &target);

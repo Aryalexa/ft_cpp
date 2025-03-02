@@ -12,7 +12,7 @@ private:
     ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 
 protected:
-    void doExecute(Bureaucrat const & executor) const;
+    void doExecute() const;
 
 public:
     ShrubberyCreationForm(const std::string &target);

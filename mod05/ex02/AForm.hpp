@@ -19,7 +19,7 @@ private:
 
 protected:
 	void check_exec_requirements(Bureaucrat const & executor) const;
-	virtual void doExecute(Bureaucrat const & executor) const = 0;
+	virtual void doExecute() const = 0;
 
 public:
 	AForm(std::string name, int gradeToSign, int gradeToExec);

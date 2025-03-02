@@ -26,10 +26,10 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 // Then, informs that <target> has been robotomized
 // successfully 50% of the time. Otherwise, informs that the robotomy failed.
-void RobotomyRequestForm::doExecute(Bureaucrat const & executor) const
+void RobotomyRequestForm::doExecute() const
 {
-    (void) executor;
     std::cout << "* drilling noises *" << std::endl;
+    sleep(1);
 
     int randomNumber = rand() % 2;
     if (randomNumber == 0)

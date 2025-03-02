@@ -25,9 +25,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 }
 
 // Create a file <target>_shrubbery in the working directory, and writes ASCII trees inside it
-void ShrubberyCreationForm::doExecute(Bureaucrat const & executor) const
+void ShrubberyCreationForm::doExecute() const
 {
-    (void) executor;
     using std::string;
     const int TIMES = 2;
     const string TREE_FILE = "tree";
