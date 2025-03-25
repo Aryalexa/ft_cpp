@@ -29,6 +29,9 @@ materia
 bureau
 *_shrubbery
 
+#mod06
+convert
+
 # Prerequisites
 *.d
 . << std::endl;
