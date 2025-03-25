@@ -90,7 +90,7 @@ void AForm::beSigned(const Bureaucrat &b)
 void AForm::execute(Bureaucrat const & executor)
 {
 	check_exec_requirements(executor);
-	doExecute(executor);
+	doExecute();
 }
 
 void AForm::check_exec_requirements(Bureaucrat const & executor) const
