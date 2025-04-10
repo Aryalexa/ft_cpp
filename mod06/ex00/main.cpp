@@ -10,16 +10,38 @@ void tests()
 {
     std::cout << "-----TESTS-----" << std::endl;
 
-    test("'c'");
-    test("'a'");
-    test("'0'");
-    test(" '0'");
-    test("'0' ");
 
+    std::cout << "-----🍁-----" << std::endl;
+    test("'c'"); // 99
+    test("'a'"); // 97
+    test("'0'"); // 48
+    test(" '0'"); // not impl
+    test("'0' "); // not impl
 
+    std::cout << "-----🍁-----" << std::endl;
     test("23");
-    test("999991111199999");
     test("-56");
+    test("+36");
+
+    std::cout << "-----🍁-----" << std::endl;
+    test("102.3f");
+    test("102.33333333f");
+    test("108f");
+    test("-88f");
+    test("+inff");
+    test("nanf");
+    test("-inff");
+    test("999000999000f");// < int overflows
+
+    std::cout << "-----🍁-----" << std::endl;
+    test("1.0");
+    test("-88.0");
+    test("1.232323232323");
+    test("999991111199999"); // < int overflows
+    test("99999111119999911111"); // < int overflows
+    test("+inf");
+    test("-inf");
+    test("nan");
     test("-");
 }
 

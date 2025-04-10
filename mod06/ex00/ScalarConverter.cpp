@@ -1,7 +1,7 @@
 #include "ScalarConverter.hpp"
 
 static const int PRECISION = 1;
-static const std::string OK = "ok";
+static const bool INFO = false;
 
 ScalarConverter::ScalarConverter()
 {
@@ -9,88 +9,65 @@ ScalarConverter::ScalarConverter()
 ScalarConverter::~ScalarConverter()
 {
 }
-static bool is_number(std::string str)
+/** CONVERSION *************************/
+
+static int to_int(std::string &str)
+{
+	int i = std::atoi(str.c_str());
+	return i;
+}
+
+static float to_float(std::string &str)
+{
+	double d = std::atof(str.c_str());
+	float f = static_cast<float>(d);
+	return f;
+}
+
+static double to_double(std::string &str)
+{
+	double d = std::atof(str.c_str());
+	return d;
+}
+
+/** CHECKS *************************/
+
+static bool is_char(std::string &str)
+{
+	return (str.length() == 3 
+		&& *str.begin() == '\'' && *str.rbegin() == '\''
+		&& std::isprint(str[1]));
+}
+
+/**
+ * check if the string is numeric, 
+ * one minus or plus sign are allowed at the beginning,
+ * points are allowed.
+ * 
+ * BUT the number of points is not controlled
+ */
+static bool is_numeric(std::string &str)
 {
 	unsigned long i = 0;
-	if (str[i] == '-') i++;
+	if (str[i] == '-' || str[i] == '+') i++;
 	if (str.length() - i <= 0)
 		return false;
 	for (; i < str.length(); i++)
-		if (!std::isdigit(str[i]))
+		if (!std::isdigit(str[i]) && str[i] != '.')
 			return false;
 	return true;
 }
-static double to_ldouble(std::string str)
+
+static bool is_int(std::string &str)
 {
-	double converted = std::atof(str.c_str());
-	return converted;
-	// double	number = 0;
-	// int	sign = 1;
-
-	// int i = 0;
-	// if (str[i] == '-' || str[i] == '+')
-	// {
-	// 	if (str[i] == '-')
-	// 		sign = sign * (-1);
-	// 	i++;
-	// }
-	// while (std::isdigit(str[i]))
-	// {
-	// 	number = number * 10 + sign * (str[i] - '0');
-	// 	i++;
-	// }
-	// return (number);
-}
-static int to_int(std::string str)
-{
-	int	number = 0;
-	int	sign = 1;
-
-	int i = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = sign * (-1);
-		i++;
-	}
-	while (std::isdigit(str[i]))
-	{
-		number = number * 10 + sign * (str[i] - '0');
-		i++;
-	}
-	return (number);
-}
-
-// static float to_float(std::string str)
-// {
-// 	float number = 0;
-// 	int	sign = 1;
-
-// 	int i = 0;
-// 	if (str[i] == '-' || str[i] == '+')
-// 	{
-// 		if (str[i] == '-')
-// 			sign = sign * (-1);
-// 		i++;
-// 	}
-// 	while (std::isdigit(str[i]))
-// 	{
-// 		number = number * 10 + sign * (str[i] - '0');
-// 		i++;
-// 	}
-// 	return (number);
-// }
-
-static bool is_int(std::string str)
-{
-	// numeric with optional minus sign
-	if (!is_number(str))
+	// numeric
+	if (!is_numeric(str))
 		return false;
 	// no points
 	if (str.find('.') != std::string::npos)
 		return false;
 	// check limits
-	double d = to_ldouble(str);
+	double d = to_double(str);
 	if (d > std::numeric_limits<int>::max())
 		return false;
 	if (d < std::numeric_limits<int>::min())
@@ -99,106 +76,182 @@ static bool is_int(std::string str)
 	return true;
 }
 
-// static bool is_float(std::string str)
-// {
-// 	// numeric with optional minus sign
-// 	if (!is_number(str))
-// 		return false;
-// 	// only one point
-// 	if (str.find('.') != std::string::npos)
-// 	{
-// 		std::size_t point_pos = str.find('.');
-// 		std::string second_part = str.substr(point_pos + 1);
-// 		if (!second_part.empty() && second_part.find('.') != std::string::npos)
-// 			return false;
-// 	}
-// 	// check limits
-// 	long double d = to_ldouble(str);
-// 	if (d > std::numeric_limits<float>::max())
-// 		return false;
-// 	if (d < std::numeric_limits<float>::min())
-// 		return false;
-	
-// 	return true;
-// }
+static bool is_float(std::string &str)
+{
+	if (str == "-inff" || str == "+inff" || str == "nanf")
+		return true;
+	// ends with an 'f'
+	if (*str.rbegin() != 'f')
+		return false;
+	// trim the 'f'
+	std::string numstr = str.substr(0, str.length() - 1);
+	// numeric
+	if (!is_numeric(numstr))
+		return false;
+	// contains 0 or 1 decimal point only
+	if (numstr.find('.') != std::string::npos)
+	{
+		std::size_t point_pos = numstr.find('.');
+		std::string second_part = numstr.substr(point_pos + 1);
+		if (!second_part.empty() && second_part.find('.') != std::string::npos)
+			return false;
+	}
+	// check limits
+	long double d = to_double(numstr);
+	if (d > std::numeric_limits<float>::max())
+		return false;
+	if (d < std::numeric_limits<float>::lowest())
+		return false;
+	return true;
+}
 
-static void display(
-	std::string msg_c, char c,
-	std::string msg_i, int i, 
-	std::string msg_f, float f, 
-	std::string msg_d, double d)
+static bool is_double(std::string &str)
+{
+	if (str == "-inf" || str == "+inf" || str == "nan")
+		return true;
+	// numeric
+	if (!is_numeric(str))
+		return false;
+	// contains 0 or 1 decimal point only
+	if (str.find('.') != std::string::npos)
+	{
+		std::size_t point_pos = str.find('.');
+		std::string second_part = str.substr(point_pos + 1);
+		if (!second_part.empty() && second_part.find('.') != std::string::npos)
+			return false;
+	}
+	return true;
+}
+
+/** DISPLAY *************************/
+
+static void display(double d, int precision = PRECISION)
 {
 	using std::cout;
 	using std::endl;
 	using std::fixed;
 	using std::setprecision;
 
+	int i = static_cast<int>(d);
+
 	cout << "char: ";
-	if (msg_c == OK)
-		cout << "'" << c << "'" << endl;
+	if (std::isprint(i))
+		cout << "'" << static_cast<char>(i) << "'" << endl;
 	else
-		cout << msg_c << endl;
+		cout << "Non displayable" << endl;
 	cout << "int: ";
-	if (msg_i == OK)
-		cout << i << endl;
-	else
-		cout << msg_i << endl;
+	cout << i << endl;
 	cout << "float: ";
-	if (msg_f == OK)
-		cout << fixed << setprecision(PRECISION) << f << "f" << endl;
-	else
-		cout << msg_f << endl;
+	cout << fixed << setprecision(precision)
+		<< static_cast<float>(d) << "f" << endl;
 	cout << "double: ";
-	if (msg_d == OK)
-		cout << fixed << setprecision(PRECISION) << d << endl;
-	else
-		cout << msg_d << endl;
+	cout << fixed << setprecision(precision) 
+		<< d << endl;
 }
+
+static void display_nan()
+{
+	using std::cout;
+	using std::endl;
+
+	cout << "char: impossible" << endl;
+	cout << "int: impossible" << endl;
+	cout << "float: nanf" << endl;
+	cout << "double: nan" << endl;
+}
+
+static void display_inf()
+{
+	using std::cout;
+	using std::endl;
+
+	cout << "char: impossible" << endl;
+	cout << "int: impossible" << endl;
+	cout << "float: +inff" << endl;
+	cout << "double: +inf" << endl;
+}
+
+static void display_minus_inf()
+{
+	using std::cout;
+	using std::endl;
+
+	cout << "char: impossible" << endl;
+	cout << "int: impossible" << endl;
+	cout << "float: -inff" << endl;
+	cout << "double: -inf" << endl;
+}
+
+/** PROCESS *************************/
 
 static void treat_char(char c)
 {
-	using std::cout;
-	using std::endl;
-	using std::fixed;
-	using std::setprecision;
-
-	display(
-		OK, c,
-		OK, static_cast<int>(c),
-		OK, static_cast<float>(c),
-		OK, static_cast<double>(c)
-	);
+	if (INFO) std::cout << "✨char!✨" << std::endl;
+	display(static_cast<int>(c));
 }
 
-static void treat_int(std::string str)
+static void treat_int(std::string &str)
 {
+	if (INFO) std::cout << "✨int!✨" << std::endl;
 	int i = to_int(str);
-
-	char c = 0;
-	std::string msg_c = OK;
-	if (std::isprint(i))
-		c = static_cast<char>(i);
-	else
-		msg_c = "Non displayable";
-
-	display(
-		msg_c, c,
-		OK, i,
-		OK, static_cast<float>(i),
-		OK, static_cast<double>(i));
+	display(i);
 }
 
+static void treat_float(std::string &str)
+{
+	if (INFO) std::cout << "✨float!✨" << std::endl;
+	if (str == "+inff")
+		display_inf();
+	else if (str == "-inff")
+		display_minus_inf();
+	else if (str == "nanf")
+		display_nan();
+	else
+	{
+		float f = to_float(str);
+		int precision = PRECISION;
+		if (str.find('.') != std::string::npos)
+			precision = str.substr(str.find('.') + 1).length() - 1;
+		display(f, precision);
+	}
+}
 
+static void treat_double(std::string &str)
+{
+	if (INFO) 
+	{
+		std::cout << "✨double!✨" << std::endl;
+		// check limits
+		if (str.length() > 16)
+			std::cout << "Warning: may be losing precision" << std::endl;
+	}
+	if (str == "+inf")
+		display_inf();
+	else if (str == "-inf")
+		display_minus_inf();
+	else if (str == "nan")
+		display_nan();
+	else
+	{
+		double d = to_double(str);
+		int precision = PRECISION;
+		if (str.find('.') != std::string::npos)
+			precision = str.substr(str.find('.') + 1).length();
+		display(d, precision);
+	}
+}
 
-
+/** convert *************************/
 void ScalarConverter::convert(std::string str)
 {
-	if (str.length() == 3 && *str.begin() == '\'' && *str.rbegin() == '\''
-		&& std::isprint(str[1]))
+	if (is_char(str))
 		treat_char(str[1]);
 	else if (is_int(str))
 		treat_int(str);
+	else if (is_float(str))
+		treat_float(str);
+	else if (is_double(str))
+		treat_double(str);
 	else
-		std::cout << "not impl" << std::endl;
-	
+		std::cout << "not supported❌" << std::endl;
 }

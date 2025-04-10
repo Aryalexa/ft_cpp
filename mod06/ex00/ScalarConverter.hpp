@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <cmath>
 #include <stdlib.h>
 
 class ScalarConverter
@@ -19,7 +20,3 @@ private:
 public:
     static void convert(std::string str);
 };
-
-
-
-
