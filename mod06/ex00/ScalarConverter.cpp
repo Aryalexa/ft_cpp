@@ -132,15 +132,23 @@ static void display(double d, int precision = PRECISION)
 	using std::fixed;
 	using std::setprecision;
 
-	int i = static_cast<int>(d);
-
-	cout << "char: ";
-	if (std::isprint(i))
-		cout << "'" << static_cast<char>(i) << "'" << endl;
+	if (d > std::numeric_limits<int>::max() || 
+		d < std::numeric_limits<int>::min())
+	{
+		cout << "char: impossible" << endl;
+		cout << "int: overflow" << endl;
+	}
 	else
-		cout << "Non displayable" << endl;
-	cout << "int: ";
-	cout << i << endl;
+	{
+		int i = static_cast<int>(d);
+		cout << "char: ";
+		if (std::isprint(i))
+			cout << "'" << static_cast<char>(i) << "'" << endl;
+		else
+			cout << "Non displayable" << endl;
+		cout << "int: ";
+		cout << i << endl;
+	}
 	cout << "float: ";
 	cout << fixed << setprecision(precision)
 		<< static_cast<float>(d) << "f" << endl;

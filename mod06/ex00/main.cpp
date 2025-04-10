@@ -22,6 +22,7 @@ void tests()
     test("23");
     test("-56");
     test("+36");
+    test("2147483647");
 
     std::cout << "-----🍁-----" << std::endl;
     test("102.3f");
