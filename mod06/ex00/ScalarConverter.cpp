@@ -36,12 +36,18 @@ static bool is_char(std::string &str)
 {
 	return (str.length() == 3 
 		&& *str.begin() == '\'' && *str.rbegin() == '\''
-		&& std::isprint(str[1]));
+		&& std::isprint(str[1])) ||
+		(str.length() == 1 && std::isprint(str[0]));
+}
+
+static bool is_print(int c)
+{
+	return (c >= 32 && c <= 126);
 }
 
 /**
  * check if the string is numeric, 
- * one minus or plus sign are allowed at the beginning,
+ * one minus or one plus sign are allowed at the beginning,
  * points are allowed.
  * 
  * BUT the number of points is not controlled
@@ -100,7 +106,7 @@ static bool is_float(std::string &str)
 	long double d = to_double(numstr);
 	if (d > std::numeric_limits<float>::max())
 		return false;
-	if (d < std::numeric_limits<float>::lowest())
+	if (d < - std::numeric_limits<float>::max())
 		return false;
 	return true;
 }
@@ -142,10 +148,10 @@ static void display(double d, int precision = PRECISION)
 	{
 		int i = static_cast<int>(d);
 		cout << "char: ";
-		if (std::isprint(i))
+		if (is_print(i))
 			cout << "'" << static_cast<char>(i) << "'" << endl;
 		else
-			cout << "Non displayable" << endl;
+			cout << "Non displayable" << endl;		
 		cout << "int: ";
 		cout << i << endl;
 	}
@@ -252,14 +258,20 @@ static void treat_double(std::string &str)
 /** convert *************************/
 void ScalarConverter::convert(std::string str)
 {
-	if (is_char(str))
-		treat_char(str[1]);
-	else if (is_int(str))
+	
+	if (is_int(str))
 		treat_int(str);
 	else if (is_float(str))
 		treat_float(str);
 	else if (is_double(str))
 		treat_double(str);
+	else if (is_char(str))
+	{
+		if (str.length() == 3)
+			treat_char(str[1]);
+		else if (str.length() == 1)
+			treat_char(str[0]);
+	}
 	else
 		std::cout << "not supported❌" << std::endl;
 }

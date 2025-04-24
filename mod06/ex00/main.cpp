@@ -12,17 +12,18 @@ void tests()
 
 
     std::cout << "-----🍁-----" << std::endl;
-    test("'c'"); // 99
+    test("a"); // 97
     test("'a'"); // 97
+    test("c"); // 99
+    test("'c'"); // 99
     test("'0'"); // 48
-    test(" '0'"); // not impl
-    test("'0' "); // not impl
 
     std::cout << "-----🍁-----" << std::endl;
     test("23");
     test("-56");
     test("+36");
     test("2147483647");
+    test("0");
 
     std::cout << "-----🍁-----" << std::endl;
     test("102.3f");
@@ -55,6 +56,6 @@ int main(int argn, char *argv[])
     }
     ScalarConverter::convert(argv[1]);
 
-    tests();
+    //tests();
     return 0;
 }
