@@ -17,12 +17,13 @@ int main()
 	Data data;
 	data.d = 123.45678901;
 	data.i = -34567;
-	data.str = "Hola \n¿Cómo estás?";
+	data.str = "Hola, \n¿Cómo estás?";
 
 	std::cout << "BEFORE" << std::endl;
 	show_data(data);
 	
 	uintptr_t address = Serializer::serialize(&data);
+	std::cout << "..." << std::endl;
 	Data *ptr = Serializer::deserialize(address);
 
 	std::cout << std::endl;
