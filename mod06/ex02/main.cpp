@@ -1,12 +1,13 @@
 #include <string>
 #include <iostream>
-#include <cstdlib>  // rand(), srand()
+#include <unistd.h> // getpid()
 #include "Base.hpp"
 
 
 Base* generate(void)
 {
-    int chosen = rand() % 3;
+    std::srand(std::time(0) + getpid());
+    int chosen = std::rand() % 3;
     switch (chosen)
     {
     case 0:
@@ -15,10 +16,8 @@ Base* generate(void)
     case 1:
         return new B;
         break;
-    case 2:
-        return new C;
-        break;
     default:
+        return new C;
         break;
     }
     return NULL;
@@ -37,7 +36,7 @@ void identify(Base* p)
     else
         str = "error";
     
-    std::cout << str << std::endl;
+    std::cout << str;
 }
 
 // prints the type, arg is a reference
@@ -45,33 +44,25 @@ void identify(Base* p)
 void identify(Base& p)
 {
     using std::cout;
-    using std::endl;
-    try
-    {
+    try {
         (void)dynamic_cast<A&>(p);
-        cout << "A" << endl;
+        cout << "A";
         return;
     }
-    catch(const std::exception& e)
-    {
-    }
-    try
-    {
+    catch(const std::exception& e) {}
+    try {
         (void)dynamic_cast<B&>(p);
-        cout << "B" << endl;
+        cout << "B";
         return;
     }
-    catch(const std::exception& e)
-    {}
-    try
-    {
+    catch(const std::exception& e) {}
+    try {
         (void)dynamic_cast<C&>(p);
-        cout << "C" << endl;
+        cout << "C";
         return;
     }
-    catch(const std::exception& e)
-    {}
-    cout << "error" << endl;
+    catch(const std::exception& e) {}
+    cout << "error";
 }
 
 int main()
@@ -80,8 +71,14 @@ int main()
 
     b = generate();
 
+    std::cout << "identified pointer: ";
     identify(b);
-    identify(*b);
+    std::cout << std::endl;
 
+    std::cout << "identified reference: "; 
+    identify(*b);
+    std::cout << std::endl;
+
+    delete b;
 }
 

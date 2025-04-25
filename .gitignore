@@ -32,6 +32,7 @@ bureau
 #mod06
 convert
 serialization
+types
 
 # Prerequisites
 *.d
