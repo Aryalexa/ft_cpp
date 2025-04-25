@@ -34,6 +34,9 @@ convert
 serialization
 types
 
+#mod07
+templates
+
 # Prerequisites
 *.d
 . << std::endl;
