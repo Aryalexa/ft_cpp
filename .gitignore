@@ -37,6 +37,9 @@ types
 #mod07
 templates
 
+#mod08
+containers
+
 # Prerequisites
 *.d
 . << std::endl;
