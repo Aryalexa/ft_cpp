@@ -45,6 +45,7 @@ containers
 *.txt
 btc
 RPN
+PmergeMe
 
 # Prerequisites
 *.d
