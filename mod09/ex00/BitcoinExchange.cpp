@@ -60,6 +60,8 @@ void BitcoinExchange::load_price_hist() {
 	fin.close();
 
 	//print_map_date_price(BitcoinExchange::price_hist);
+
+	// min and max dates in DB
 	map_date_price::iterator it;
 
 	it = price_hist.begin();
