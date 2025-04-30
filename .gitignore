@@ -40,6 +40,11 @@ templates
 #mod08
 containers
 
+#mod09
+*.csv
+*.txt
+btc
+
 # Prerequisites
 *.d
 . << std::endl;
