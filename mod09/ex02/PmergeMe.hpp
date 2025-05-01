@@ -9,6 +9,8 @@
 #include <vector>
 #include <algorithm>
 
+static size_t min(size_t n1, size_t n2);
+static unsigned int index_t(unsigned int k);
 
 template <typename C>
 void print_nums(const std::string &msg, const C &nums) {
@@ -36,6 +38,7 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& set)
     return out << " ]";
 }
 
+
 class PmergeMe1
 {
 private:
@@ -46,9 +49,9 @@ private:
 	PmergeMe1 &operator=(const PmergeMe1 &other);
 	~PmergeMe1();
 	
-	static PmergeMe1::contType mergeinsert_sort(contType c);
-	static PmergeMe1::contType binary_insertion(contType c, int elem, size_t limit);
-	static int binarySearch(contType a, int elem, int low, int high);
+	static void mergeinsert_sort(contType &c);
+	static void binary_insertion(contType &c, int elem, size_t limit);
+	static int binarySearch(const contType &a, int elem, int low, int high);
 	
 public:
 	static const std::string CONTAINER_NAME;

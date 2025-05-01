@@ -23,7 +23,7 @@ const std::string PmergeMe1::CONTAINER_NAME = "vector";
  * returns position to insert
  * - low and high are both included in the search.
  */
-int PmergeMe1::binarySearch(PmergeMe1::contType a, int elem, int low, int high)
+int PmergeMe1::binarySearch(const PmergeMe1::contType &a, int elem, int low, int high)
 {
 	// std::cout << "   binSearch " << elem 
 	// 	<< " in " << a << " [" << low << "," << high << "]" << std::endl;
@@ -37,17 +37,16 @@ int PmergeMe1::binarySearch(PmergeMe1::contType a, int elem, int low, int high)
     return binarySearch(a, elem, low, mid - 1);
 }
 
-PmergeMe1::contType PmergeMe1::binary_insertion(contType c, int elem, size_t limit) {
+void PmergeMe1::binary_insertion(contType &c, int elem, size_t limit) {
 	
 	size_t loc = binarySearch(c, elem, 0, limit);
 	//std::cout << "  insert " << elem << " in loc " << loc << " of " << c << std::endl;;
 	c.insert(c.begin() + loc, elem);
-	return c;
 }
 
-PmergeMe1::contType PmergeMe1::mergeinsert_sort(contType d) {
+void PmergeMe1::mergeinsert_sort(contType &d) {
 	size_t n = d.size();
-	if (n == 1) return d;
+	if (n == 1) return;
 
 	// 1. pairwise comparison
 	contType a; //big
@@ -69,7 +68,7 @@ PmergeMe1::contType PmergeMe1::mergeinsert_sort(contType d) {
 	for (size_t i = 0; i < n/2; ++i) {
 		m[a[i]] = b[i];
 	}
-	a = mergeinsert_sort(a);
+	mergeinsert_sort(a);
 	for (size_t i = 0; i < n/2; ++i) {
 		b[i] = m[a[i]];
 	}
@@ -90,21 +89,20 @@ PmergeMe1::contType PmergeMe1::mergeinsert_sort(contType d) {
 		// the elements b[t_k, t_k-1, .., t_(k-1)+1]
 		// are inserted in that order
 		for (size_t i = from; i >= index_t(k - 1) + 1 - 1; --i) { //idx0
-			d = binary_insertion(d, b[i], u - 1);
+			binary_insertion(d, b[i], u - 1);
 			// adjust u: position of a[i] in d
 			while (d[u] != a[i - 1])
 				--u;
 		}
 		++k;
 	}
-	return d;
 }
 
 void PmergeMe1::sort(std::list<int> nums) {
 	// fill cont
 	contType c = contType(nums.begin(), nums.end());
 	// sort
-	c = mergeinsert_sort(c);
+	mergeinsert_sort(c);
 	print_nums("result", c);
 
 }
