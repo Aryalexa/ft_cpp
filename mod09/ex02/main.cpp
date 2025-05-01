@@ -48,7 +48,7 @@ int main(int argn, char *argv[]) {
 		std::list<int> nums = get_args_as_ints(argn, argv);
 		if (nums.size() < 1)
 			return 0;
-		print_nums(nums);
+		print_nums("input", nums);
 
 		//c1
 		PmergeMe1::sort(nums);
