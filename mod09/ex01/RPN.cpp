@@ -71,7 +71,11 @@ double RPN::solve(std::string expression) {
 		}
 	}
 	if (st.size() != 1)
-		throw std::runtime_error("final value not reached");	
+		throw std::runtime_error("final value not reached");
+
+	std::cout << "quita set de aqui!!!" << std::endl; //TODO
+	///////////// README !!! !!!
+	
 	// return last remaining num
 	return st.top();
 }	
