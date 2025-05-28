@@ -1,13 +1,15 @@
 #include <string>
 #include <iostream>
 #include <unistd.h> // getpid()
+#include <cstdlib>  // rand(), srand()
+#include <ctime>    // time()
 #include "Base.hpp"
 
 
 Base* generate(void)
 {
-    std::srand(std::time(0) + getpid());
-    int chosen = std::rand() % 3;
+    srand(time(0) + getpid());
+    int chosen = rand() % 3;
     switch (chosen)
     {
     case 0:
