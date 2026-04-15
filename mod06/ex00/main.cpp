@@ -56,6 +56,8 @@ int main(int argn, char *argv[])
     }
     ScalarConverter::convert(argv[1]);
 
-    //tests();
+    // (void)argn;
+    // (void)argv;
+    // tests();
     return 0;
 }

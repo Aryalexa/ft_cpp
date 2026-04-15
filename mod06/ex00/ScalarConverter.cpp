@@ -142,7 +142,7 @@ static void display(double d, int precision = PRECISION)
 		d < std::numeric_limits<int>::min())
 	{
 		cout << "char: impossible" << endl;
-		cout << "int: overflow" << endl;
+		cout << "int: impossible" << endl;
 	}
 	else
 	{
@@ -196,22 +196,31 @@ static void display_minus_inf()
 	cout << "double: -inf" << endl;
 }
 
+/** count decimals after '.' in an input string (does not consider trailing 'f') */
+static int count_decimals_from_input(const std::string &s)
+{
+	std::size_t pos = s.find('.');
+	if (pos == std::string::npos)
+		return 0;
+	return static_cast<int>(s.length() - pos - 1);
+}
+
 /** PROCESS *************************/
 
-static void treat_char(char c)
+static void handle_char(char c)
 {
 	if (INFO) std::cout << "✨char!✨" << std::endl;
 	display(static_cast<int>(c));
 }
 
-static void treat_int(const std::string &str)
+static void handle_int(const std::string &str)
 {
 	if (INFO) std::cout << "✨int!✨" << std::endl;
 	int i = to_int(str);
 	display(i);
 }
 
-static void treat_float(const std::string &str)
+static void handle_float(const std::string &str)
 {
 	if (INFO) std::cout << "✨float!✨" << std::endl;
 	if (str == "+inff")
@@ -224,13 +233,15 @@ static void treat_float(const std::string &str)
 	{
 		float f = to_float(str);
 		int precision = PRECISION;
-		if (str.find('.') != std::string::npos)
-			precision = str.substr(str.find('.') + 1).length() - 1;
+	// determine decimals from input (trim trailing 'f')
+	std::string numstr = str.substr(0, str.length() - 1);
+	int decimals = count_decimals_from_input(numstr);
+	precision = (decimals == 0) ? 1 : decimals;
 		display(f, precision);
 	}
 }
 
-static void treat_double(const std::string &str)
+static void handle_double(const std::string &str)
 {
 	if (INFO) 
 	{
@@ -249,8 +260,8 @@ static void treat_double(const std::string &str)
 	{
 		double d = to_double(str);
 		int precision = PRECISION;
-		if (str.find('.') != std::string::npos)
-			precision = str.substr(str.find('.') + 1).length();
+	int decimals = count_decimals_from_input(str);
+	precision = (decimals == 0) ? 1 : decimals;
 		display(d, precision);
 	}
 }
@@ -260,17 +271,17 @@ void ScalarConverter::convert(const std::string &str)
 {
 	
 	if (is_int(str))
-		treat_int(str);
+		handle_int(str);
 	else if (is_float(str))
-		treat_float(str);
+		handle_float(str);
 	else if (is_double(str))
-		treat_double(str);
+		handle_double(str);
 	else if (is_char(str))
 	{
 		if (str.length() == 3)
-			treat_char(str[1]);
+			handle_char(str[1]);
 		else if (str.length() == 1)
-			treat_char(str[0]);
+			handle_char(str[0]);
 	}
 	else
 		std::cout << "not supported❌" << std::endl;
