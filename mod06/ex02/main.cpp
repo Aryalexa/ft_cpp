@@ -8,7 +8,6 @@
 
 Base* generate(void)
 {
-    srand(time(0) + getpid());
     int chosen = rand() % 3;
     switch (chosen)
     {
@@ -42,7 +41,6 @@ void identify(Base* p)
 }
 
 // prints the type, arg is a reference
-
 void identify(Base& p)
 {
     using std::cout;
@@ -69,8 +67,12 @@ void identify(Base& p)
 
 int main()
 {
+    // seed random generator once
+    srand(time(0) + getpid());
+
     Base *b;
 
+    // single demonstration
     b = generate();
 
     std::cout << "identified pointer: ";
@@ -82,5 +84,26 @@ int main()
     std::cout << std::endl;
 
     delete b;
+
+    // controlled tests: generate many times and count occurrences
+    const int TESTS = 20;
+    int countA = 0, countB = 0, countC = 0;
+    for (int i = 0; i < TESTS; ++i)
+    {
+        Base *t = generate();
+        std::cout << "test " << i << " -> ";
+        identify(t);
+        std::cout << " | ";
+        identify(*t);
+        std::cout << std::endl;
+
+        if (dynamic_cast<A *>(t) != NULL) ++countA;
+        else if (dynamic_cast<B *>(t) != NULL) ++countB;
+        else if (dynamic_cast<C *>(t) != NULL) ++countC;
+
+        delete t;
+    }
+
+    std::cout << "Summary: A=" << countA << " B=" << countB << " C=" << countC << std::endl;
 }
 
