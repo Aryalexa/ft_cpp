@@ -10,7 +10,7 @@
 
 class ScalarConverter
 {
-/* making it not instatiable */
+/* making it not instantiable */
 private:
     ScalarConverter();
     ScalarConverter(const ScalarConverter &other);
@@ -18,5 +18,5 @@ private:
     ~ScalarConverter();
 
 public:
-    static void convert(std::string str);
+    static void convert(const std::string &str);
 };

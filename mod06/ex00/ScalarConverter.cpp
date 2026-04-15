@@ -11,20 +11,20 @@ ScalarConverter::~ScalarConverter()
 }
 /** CONVERSION *************************/
 
-static int to_int(std::string &str)
+static int to_int(const std::string &str)
 {
 	int i = std::atoi(str.c_str());
 	return i;
 }
 
-static float to_float(std::string &str)
+static float to_float(const std::string &str)
 {
 	double d = std::atof(str.c_str());
 	float f = static_cast<float>(d);
 	return f;
 }
 
-static double to_double(std::string &str)
+static double to_double(const std::string &str)
 {
 	double d = std::atof(str.c_str());
 	return d;
@@ -32,7 +32,7 @@ static double to_double(std::string &str)
 
 /** CHECKS *************************/
 
-static bool is_char(std::string &str)
+static bool is_char(const std::string &str)
 {
 	return (str.length() == 3 
 		&& *str.begin() == '\'' && *str.rbegin() == '\''
@@ -52,7 +52,7 @@ static bool is_print(int c)
  * 
  * BUT the number of points is not controlled
  */
-static bool is_numeric(std::string &str)
+static bool is_numeric(const std::string &str)
 {
 	unsigned long i = 0;
 	if (str[i] == '-' || str[i] == '+') i++;
@@ -64,7 +64,7 @@ static bool is_numeric(std::string &str)
 	return true;
 }
 
-static bool is_int(std::string &str)
+static bool is_int(const std::string &str)
 {
 	// numeric
 	if (!is_numeric(str))
@@ -82,7 +82,7 @@ static bool is_int(std::string &str)
 	return true;
 }
 
-static bool is_float(std::string &str)
+static bool is_float(const std::string &str)
 {
 	if (str == "-inff" || str == "+inff" || str == "nanf")
 		return true;
@@ -111,7 +111,7 @@ static bool is_float(std::string &str)
 	return true;
 }
 
-static bool is_double(std::string &str)
+static bool is_double(const std::string &str)
 {
 	if (str == "-inf" || str == "+inf" || str == "nan")
 		return true;
@@ -204,14 +204,14 @@ static void treat_char(char c)
 	display(static_cast<int>(c));
 }
 
-static void treat_int(std::string &str)
+static void treat_int(const std::string &str)
 {
 	if (INFO) std::cout << "✨int!✨" << std::endl;
 	int i = to_int(str);
 	display(i);
 }
 
-static void treat_float(std::string &str)
+static void treat_float(const std::string &str)
 {
 	if (INFO) std::cout << "✨float!✨" << std::endl;
 	if (str == "+inff")
@@ -230,7 +230,7 @@ static void treat_float(std::string &str)
 	}
 }
 
-static void treat_double(std::string &str)
+static void treat_double(const std::string &str)
 {
 	if (INFO) 
 	{
@@ -256,7 +256,7 @@ static void treat_double(std::string &str)
 }
 
 /** convert *************************/
-void ScalarConverter::convert(std::string str)
+void ScalarConverter::convert(const std::string &str)
 {
 	
 	if (is_int(str))
