@@ -1,9 +1,10 @@
 
 #include "Serializer.hpp"
 #include <iomanip>
+#include <cassert>
 
 
-static void show_data(Data data)
+static void show_data(const Data &data)
 {
 	using std::cout;
 	using std::endl;
@@ -25,6 +26,9 @@ int main()
 	uintptr_t address = Serializer::serialize(&data);
 	std::cout << "..." << std::endl;
 	Data *ptr = Serializer::deserialize(address);
+
+	// assert: same pointer
+	assert(ptr == &data);
 
 	std::cout << std::endl;
 	std::cout << "AFTER" << std::endl;
