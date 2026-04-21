@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <stdexcept>
 
 template <typename T>
 class Array
@@ -10,16 +11,17 @@ private:
 	T *arr;
 	unsigned int len;
 public:
-	Array(): len(0) {}
-	Array(unsigned int n) : arr(new T[n]), len(n) {}
+	Array(): arr(0), len(0) {}
+	Array(unsigned int n) : arr(n ? new T[n] : 0), len(n) {}
 	Array(const Array &other);
 	Array &operator=(const Array &other);
 	~Array() {
-		if (len > 0)
+		if (arr)
 			delete [] arr;
 	}
 
 	T &operator[](unsigned int index);
+	const T &operator[](unsigned int index) const;
 	unsigned int size() const {
 		return len;
 	}
@@ -28,7 +30,7 @@ public:
 
 
 template <typename T>
-Array<T>::Array(const Array<T> &other): arr(new T[other.len]), len(other.len)
+Array<T>::Array(const Array<T> &other): arr(other.len ? new T[other.len] : 0), len(other.len)
 {
 	for (unsigned int i = 0; i < len; ++i)
 		arr[i] = other.arr[i];
@@ -39,12 +41,14 @@ Array<T> &Array<T>::operator=(const Array<T> &other)
 {
 	if (this != &other)
 	{
-		if (len > 0)
+		/** if we already have values, we must overwrite them */
+		T *tmp = other.len ? new T[other.len] : 0;
+		for (unsigned int i = 0; i < other.len; ++i)
+			tmp[i] = other.arr[i];
+		if (arr)
 			delete [] arr;
+		arr = tmp;
 		len = other.len;
-		arr = new T[len];
-		for (unsigned int i = 0; i < len; ++i)
-			arr[i] = other.arr[i];
 	}
 	return *this;
 }
@@ -54,12 +58,19 @@ T &Array<T>::operator[](unsigned int index)
 {
 	if (index < len)
 		return arr[index];
-	throw std::runtime_error("Exception: index out of bounds");
-	//throw std::exception();
+	throw std::out_of_range("Exception: index out of bounds");
 }
 
 template <typename T>
-void print_arr(Array<T> arr)
+const T &Array<T>::operator[](unsigned int index) const
+{
+	if (index < len)
+		return arr[index];
+	throw std::out_of_range("Exception: index out of bounds");
+}
+
+template <typename T>
+void print_arr(const Array<T> &arr)
 {
 	using std::cout;
 	using std::endl;

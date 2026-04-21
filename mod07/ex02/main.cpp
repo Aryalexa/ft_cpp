@@ -1,5 +1,7 @@
 #include <string>
 #include <iostream>
+#include <cstdlib> // for rand() and srand()
+#include <ctime> // for time()
 #include "Array.hpp"
 
 #define MAX_VAL 750
@@ -49,7 +51,7 @@ int test_42()
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;// delete because we no longer need the mirror array
     return 0;
 }
 
