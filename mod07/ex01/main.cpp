@@ -29,4 +29,9 @@ int main() {
 	std::string str = "hola";
 	::iter(str.c_str(), str.length(), my_print<char>);
 
+	std::cout << "const int array" << "----------" << std::endl;
+	const int const_arr[3] = {42, 84, 126};
+	::iter(const_arr, 3, my_print<int>);
+	::iter(const_arr, 3, gt5<int>);
+
 }
