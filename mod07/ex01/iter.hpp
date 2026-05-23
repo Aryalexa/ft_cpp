@@ -2,13 +2,18 @@
 #include <iostream>
 
 template <typename T>
-void my_print(T v) {
+void my_print(const T &v) {
 	std::cout << v << std::endl;
 }
 
 template <typename T>
-void gt5(T a) {
+void gt5(const T &a) {
 	::my_print(a > 5);
+}
+
+template <typename T>
+void increment(T &v) {
+	v++;
 }
 
 

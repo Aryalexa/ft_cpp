@@ -34,4 +34,12 @@ int main() {
 	::iter(const_arr, 3, my_print<int>);
 	::iter(const_arr, 3, gt5<int>);
 
+	std::cout << "non-const int array - increment test" << "----------" << std::endl;
+	int arr_increment[3] = {1, 2, 3};
+	std::cout << "Before: " << std::endl;
+	::iter(arr_increment, 3, my_print<int>);
+	::iter(arr_increment, 3, increment<int>);
+	std::cout << "After increment: " << std::endl;
+	::iter(arr_increment, 3, my_print<int>);
+
 }
