@@ -14,8 +14,11 @@ void test_42()
 	sp.addNumber(17);
 	sp.addNumber(9);
 	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+
+	std::cout << "------" << std::endl;
+	sp.display();
+	std::cout << "shortest: " << sp.shortestSpan() << std::endl;
+	std::cout << "longest: " << sp.longestSpan() << std::endl;
 }
 
 void test_ro4() {
@@ -29,8 +32,10 @@ void test_ro4() {
         Span tmp = sp;
         Span test(tmp);
     }
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;	
+	std::cout << "------" << std::endl;
+	sp.display();
+	std::cout << "shortest: " << sp.shortestSpan() << std::endl;
+	std::cout << "longest: " << sp.longestSpan() << std::endl;	
 }
 
 void test_alot() {
@@ -43,15 +48,19 @@ void test_alot() {
         const int value = rand() % N;
 		sp.addNumber(value);
     }
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;		
+	std::cout << "------" << std::endl;
+	std::cout << "Len: " << N << std::endl;
+	std::cout << "shortest: " << sp.shortestSpan() << std::endl;
+	std::cout << "longest: " << sp.longestSpan() << std::endl;		
 }
 
 void test_range_of_iter() {
+	std::cout << "------" << std::endl;
+
 	size_t N = 10000;
 	Span sp = Span(N);
 
-
+	sp.display();
 
 	sp.addNumber(3);
 
