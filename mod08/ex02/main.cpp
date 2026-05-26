@@ -29,10 +29,14 @@ void test_42() {
 }
 
 void test_seq_containers() {
-	typedef std::vector<int> Container;
-	// typedef std::deque<int> Container;
-	// typedef std::list<int> Container;
+	/* This test checks the compatibility of MutantStack with standard sequence containers
+	The idea is to test the three main sequence containers: vector, deque, and list.
+	*/
+	//typedef std::vector<int> Container;
+	//typedef std::deque<int> Container;
+	typedef std::list<int> Container;
 
+	std::cout << "---" << std::endl;
 	Container my_container;
 	my_container.push_back(5);
 	my_container.push_back(17);
