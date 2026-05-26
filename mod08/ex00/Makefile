@@ -5,21 +5,22 @@ NAME = containers
 
 SRCS = main.cpp
 OBJS = $(SRCS:%.cpp=build/%.o)
+DEPS = easyfind.hpp
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-			$(CXX) $(CXXFLAGS) -o $@ $^
+        $(CXX) $(CXXFLAGS) -o $@ $^
 
-build/%.o: %.cpp
-			@mkdir -p build
-			$(CXX) $(CXXFLAGS) -c $< -o $@
+build/%.o: %.cpp $(DEPS)
+        @mkdir -p build
+        $(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-			rm -rf build
+        rm -rf build
 
 fclean: clean
-			rm -f $(NAME)
+        rm -f $(NAME)
 
 re: fclean all
 

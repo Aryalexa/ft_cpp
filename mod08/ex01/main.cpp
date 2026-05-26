@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <cstdlib> // for std::rand and std::srand
+#include <ctime> // for std::time
 
 void test_42()
 {
@@ -35,7 +37,7 @@ void test_alot() {
 	size_t N = 10000;
 	Span sp = Span(N);
 
-	srand(time(NULL));
+	srand(time(NULL)); // Seed the random number generator (when null is passed, it uses the current time)
     for (size_t i = 0; i < N; i++)
     {
         const int value = rand() % N;

@@ -1,16 +1,16 @@
 //#include <cctype>
 #include <exception>
+#include <algorithm>
 
 
 // T is a container of ints. 
 // Returns index
 template <typename T>
 size_t easyfind(T c, int x) {
-	typename T::iterator it;
-	int i = 0;
-	for (it = c.begin(); it != c.end(); ++it)
-	{
-		if ((*it) == x) return i;
+	size_t i = 0;
+	for (typename T::iterator iter = c.begin(); iter != c.end(); ++iter) {
+		if (*iter == x)
+			return i;
 		++i;
 	}
 	throw std::runtime_error("not found");

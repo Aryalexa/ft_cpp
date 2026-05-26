@@ -1,4 +1,6 @@
 #include "Span.hpp"
+#include <cstdlib> // for std::abs
+#include <ctime>
 
 Span::Span() {}
 
@@ -28,13 +30,17 @@ unsigned int Span::shortestSpan() {
 	if (nums.size() < 2)
 		throw std::runtime_error("not enough numbers");
 	
-	shortest = std::abs(nums[0] - nums[1]);
-	for (unsigned int i = 0; i < nums.size(); ++i) 
-		for (unsigned int j = i + 1; j < nums.size(); ++j) {
-			unsigned int span = abs(nums[i] - nums[j]);
-			if (span < shortest)
-				shortest = span;
-		}
+	// Create a copy and sort it for efficient span calculation
+	std::vector<int> sorted_nums(nums.begin(), nums.end());
+	std::sort(sorted_nums.begin(), sorted_nums.end());
+	
+	// The shortest span is always between adjacent elements in sorted array
+	shortest = sorted_nums[1] - sorted_nums[0];
+	for (unsigned int i = 1; i < sorted_nums.size(); ++i) {
+		unsigned int span = sorted_nums[i] - sorted_nums[i - 1];
+		if (span < shortest)
+			shortest = span;
+	}
 	return shortest;
 }
 unsigned int Span::longestSpan() {
@@ -43,13 +49,11 @@ unsigned int Span::longestSpan() {
 	if (nums.size() < 2)
 		throw std::runtime_error("not enough numbers");
 	
-	longest = std::abs(nums[0] - nums[1]);
-	for (unsigned int i = 0; i < nums.size(); ++i) 
-		for (unsigned int j = i + 1; j < nums.size(); ++j) {
-			unsigned int span = abs(nums[i] - nums[j]);
-			if (span > longest)
-				longest = span;
-		}
+	// The longest span is simply max - min
+	std::vector<int> sorted_nums(nums.begin(), nums.end());
+	std::sort(sorted_nums.begin(), sorted_nums.end());
+	
+	longest = sorted_nums[sorted_nums.size() - 1] - sorted_nums[0];
 	return longest;
 }
 
