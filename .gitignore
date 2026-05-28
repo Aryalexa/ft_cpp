@@ -1,5 +1,6 @@
 .vscode/
 *.log
+.DS_store
 
 #mod00
 megaphone
