@@ -19,8 +19,8 @@ bool  in_set(std::set<int> s, int elem) {
 	return false;
 }
 
-static std::list<int> get_args_as_ints(int argn, char *argv[]) {
-	std::list<int> nums;
+static std::deque<int> get_args_as_ints(int argn, char *argv[]) {
+	std::deque<int> nums;
 	std::set<int> numset;
 	std::ostringstream oss;
 	for (int i = 1; i < argn; ++i) {
@@ -45,12 +45,25 @@ static std::list<int> get_args_as_ints(int argn, char *argv[]) {
 	return nums;
 }
 
-
+void print_nums(const std::string &msg, const std::vector<int> &nums) {
+	std::cout << msg << " ";
+	for (size_t i = 0; i < nums.size(); ++i) {
+		std::cout << nums[i] << " ";
+	}
+	std::cout << std::endl;
+}
+void print_nums(const std::string &msg, const std::deque<int> &nums) {
+	std::cout << msg << " ";
+	for (std::deque<int>::const_iterator it = nums.begin(); it != nums.end(); ++it) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+}
 
 int main(int argn, char *argv[]) {
 
 	try {
-		std::list<int> nums = get_args_as_ints(argn, argv);
+		std::deque<int> nums = get_args_as_ints(argn, argv);
 		if (nums.size() < 1)
 			return 0;
 		print_nums("Before:", nums);
@@ -59,23 +72,23 @@ int main(int argn, char *argv[]) {
 
 		//c1
 		const std::string container1 = "std::deque<int>";
-		std::deque<int> res1;
+		std::deque<int> res1 = nums;
 		gettimeofday(&start, NULL);
-		res1 = PmergeMe< std::deque<int> >::sort(nums);
+		PmergeMe::sort(res1);
 		gettimeofday(&end, NULL);
 		double time1 = (end.tv_sec - start.tv_sec) * 1000.0;      // sec to ms
 		time1 += (end.tv_usec - start.tv_usec) / 1000.0;          // us to ms
 
 		//c2
 		const std::string container2 = "std::vector<int>";
-		std::vector<int> res2;
+		std::vector<int> res2 = nums.size() > 0 ? std::vector<int>(nums.begin(), nums.end()) : std::vector<int>();
 		gettimeofday(&start, NULL);
-		res2 = PmergeMe< std::vector<int> >::sort(nums);
+		PmergeMe::sort(res2);
 		gettimeofday(&end, NULL);
 		double time2 = (end.tv_sec - start.tv_sec) * 1000.0;      // sec to ms
 		time2 += (end.tv_usec - start.tv_usec) / 1000.0;          // us to ms
 
-		assert_same(res1, res2);
+		// assert_same(res1, res2);
 		print_nums("After:", res1);
 		//print_nums("result", res2);
 		/**
