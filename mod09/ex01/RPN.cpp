@@ -12,7 +12,7 @@ RPN::str_set RPN::init_operations() {
 const RPN::str_set RPN::OPERATIONS = RPN::init_operations();
 RPN::rpnStack RPN::st;
 
-void RPN::apply_op(std::string operation) {
+void RPN::apply_op(const std::string &operation) {
 	numType num1, num2;
 
 	num2 = st.top();
@@ -23,35 +23,36 @@ void RPN::apply_op(std::string operation) {
 	if (operation == "+")
 		st.push(num1 + num2);
 	else if (operation == "-")
-		st.push(num1 - num2); 
+		st.push(num1 - num2);
 	else if (operation == "*")
-		st.push(num1 * num2); 
+		st.push(num1 * num2);
 	else if (operation == "/") {
 		if (num2 == 0)
 			throw std::runtime_error("div by zero");	
 		st.push(num1 / num2); 
-	}
+	} else {
+        // This should never happen
+        throw std::runtime_error("Unknown operation");
+    }
 }
 
-bool RPN::is_num(std::string str, numType *num) {
+bool RPN::to_num(const std::string &str, numType &num) {
 	std::istringstream iss(str);
-	iss >> *num;
+	iss >> num;
 	if (!iss || !iss.eof()){
-		//std::cout << "isnum: false" << std::endl;
 		return false;
 	}
-	//std::cout << "is_num: true" << std::endl;
 	return true;
 }
 
-bool RPN::in_set(str_set s, std::string str) {
+bool RPN::in_set(const str_set &s, const std::string &str) {
 	str_set::iterator it = s.find(str);
 	if (it != s.end())
 		return true;
 	return false;
 }
 
-double RPN::solve(std::string expression) {
+double RPN::solve(const std::string &expression) {
 	std::ostringstream oss;
 	std::istringstream iss(expression);
 	std::string elem;
@@ -59,11 +60,11 @@ double RPN::solve(std::string expression) {
 	while (!iss.eof()) {
 		iss >> elem;
 		if (!iss)
-			throw std::runtime_error("bad format");	
+			throw std::runtime_error("input error");	
 		//std::cout << "read " << elem << std::endl;
 		if (in_set(OPERATIONS, elem) && st.size() > 1)
 			apply_op(elem);
-		else if (is_num(elem, &num))
+		else if (to_num(elem, num))
 			st.push(num);
 		else {
 			oss << "bad format (" << elem << ")";
@@ -75,6 +76,6 @@ double RPN::solve(std::string expression) {
 
 	// get result and clean stack for next execution
 	numType result = st.top();
-	std::stack<numType>().swap(st); // this does..
+	st = rpnStack(); // Clear stack for next execution
 	return result;
 }	

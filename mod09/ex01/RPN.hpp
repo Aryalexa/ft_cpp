@@ -24,11 +24,11 @@ private:
 	RPN &operator=(const RPN &other);
 	~RPN();
 
-	static bool in_set(str_set s, std::string str);
-	static bool is_num(std::string str, numType *num);
-	static void apply_op(std::string operation);
+	static bool in_set(const str_set &s, const std::string &str);
+	static bool to_num(const std::string &str, numType &num);
+	static void apply_op(const std::string &operation);
 
 public:
 
-	static double solve(std::string expression);
+	static double solve(const std::string &expression);
 };
