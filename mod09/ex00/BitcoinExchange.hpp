@@ -15,9 +15,9 @@ private:
 	typedef std::string dateStr;
 	typedef std::map<dateStr, double> map_date_price;
 
-	static const std::string PRICE_HIST_CSV;
-	static const std::string PRICE_HIST_HEADER;
-	static const std::string INPUT_HEADER;
+	static const std::string DB_FILENAME;
+	static const std::string DB_HEADER;
+	static const std::string WALLET_HEADER;
 	static const double MIN_VAL;
 	static const double MAX_VAL;
 
@@ -30,13 +30,14 @@ private:
 	BitcoinExchange &operator=(const BitcoinExchange &other);
 	~BitcoinExchange();
 	
-	static void load_price_hist();
-	static void read_price_line(const std::string& line, int line_num);
+
+	static void read_price_line(const std::string& line);
 	static bool is_valid_date(const dateStr &date_str);
-	static void process_input_line(const std::string& line, int line_num);
+	static void process_wallet_line(const std::string& line);
 	static void print_map_date_price(const map_date_price& map, unsigned int max=10);
 	
 public:
-	static void display_wallet(std::string wallet_filename);
+	static void load_price_hist();
+	static void display_wallet_value(std::string wallet_filename);
 
 };
