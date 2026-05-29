@@ -1,13 +1,8 @@
 
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <cmath>
-#include <list>
-#include <map>
 #include <vector>
-#include <algorithm>
+#include <deque>
 
 
 class PmergeMe

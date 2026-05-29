@@ -2,58 +2,38 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <set>
-#include <vector>
-#include <deque>
 #include "PmergeMe.hpp"
-#include <sys/time.h>
+#include <ctime>
 #include <iomanip>
 
 
 
-bool  in_set(std::set<int> s, int elem) {
-	std::set<int>::iterator it = s.find(elem);
-	if (it != s.end())
-		return true;
-	return false;
-}
-
 static std::deque<int> get_args_as_ints(int argn, char *argv[]) {
 	std::deque<int> nums;
-	std::set<int> numset;
 	std::ostringstream oss;
 	for (int i = 1; i < argn; ++i) {
 		std::istringstream iss(argv[i]);
 		int num;
 		iss >> num;
 		if (!iss || !iss.eof()) {
-			oss << "non integer encountered" <<
-				" - arg #" << i << ": " << argv[i];
+			oss << "Error: non integer argument";
 			throw std::runtime_error(oss.str());
 		}
 		if (num < 0) {
-			oss << "not positive integer encountered" <<
-				" - arg #" << i << ": " << argv[i];
+			oss << "Error: not positive integer";
 			throw std::runtime_error(oss.str());	
 		}
-		if (in_set(numset, num))
-			continue;
-		numset.insert(num);
 		nums.push_back(num);
 	}
+	if (nums.empty())
+		throw std::runtime_error("Error: no numbers provided");
 	return nums;
 }
 
-void print_nums(const std::string &msg, const std::vector<int> &nums) {
+template <typename Container>
+void print_nums(const std::string &msg, const Container &nums) {
 	std::cout << msg << " ";
-	for (size_t i = 0; i < nums.size(); ++i) {
-		std::cout << nums[i] << " ";
-	}
-	std::cout << std::endl;
-}
-void print_nums(const std::string &msg, const std::deque<int> &nums) {
-	std::cout << msg << " ";
-	for (std::deque<int>::const_iterator it = nums.begin(); it != nums.end(); ++it) {
+	for (typename Container::const_iterator it = nums.begin(); it != nums.end(); ++it) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
@@ -67,27 +47,23 @@ int main(int argn, char *argv[]) {
 			return 0;
 		print_nums("Before:", nums);
 
-		timeval start, end;
-
+		std::clock_t start, end;
 		//c1
 		const std::string container1 = "std::deque<int>";
 		std::deque<int> res1 = nums;
-		gettimeofday(&start, NULL);
+		start = std::clock();
 		PmergeMe::sort(res1);
-		gettimeofday(&end, NULL);
-		double time1 = (end.tv_sec - start.tv_sec) * 1000.0;      // sec to ms
-		time1 += (end.tv_usec - start.tv_usec) / 1000.0;          // us to ms
+		end = std::clock();
+		double time1 = double(end - start) / CLOCKS_PER_SEC * 1000.0;  // clock ticks to ms
 
 		//c2
 		const std::string container2 = "std::vector<int>";
-		std::vector<int> res2 = nums.size() > 0 ? std::vector<int>(nums.begin(), nums.end()) : std::vector<int>();
-		gettimeofday(&start, NULL);
+		std::vector<int> res2(nums.begin(), nums.end());
+		start = std::clock();
 		PmergeMe::sort(res2);
-		gettimeofday(&end, NULL);
-		double time2 = (end.tv_sec - start.tv_sec) * 1000.0;      // sec to ms
-		time2 += (end.tv_usec - start.tv_usec) / 1000.0;          // us to ms
+		end = std::clock();
+		double time2 = double(end - start) / CLOCKS_PER_SEC * 1000.0;  // clock ticks to ms
 
-		// assert_same(res1, res2);
 		print_nums("After:", res1);
 		//print_nums("result", res2);
 		/**
