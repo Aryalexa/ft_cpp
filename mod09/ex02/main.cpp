@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <list>
 #include <set>
 #include <vector>
 #include <deque>
