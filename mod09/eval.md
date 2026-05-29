@@ -28,8 +28,6 @@ For this first exercise, you have to find a makefile with the usual compilation 
 ### Code review
 
 Check that a makefile is present with the usual compilation rules.
-Check that a makefile is present with the usual compilation rules.
-Check that a makefile is present with the usual compilation rules.
 
 Check in the code that the program uses at least one container.
 
@@ -92,8 +90,7 @@ Yes/No
 
 Check that the program runs correctly using different formulas of your choice.
 
-The program is not required to handle expressions with parenthesis or decimals
-number.
+The program is not required to handle expressions with parenthesis or decimal numbers.
 
 If there is any problem during the execution then the evaluation stops here.
 
@@ -106,7 +103,7 @@ Check that the program runs correctly using different formulas of your choice.
 
 Here is some tests:
 
-8 9 * 9 - 9 - 9 - 4 - 1 +
+    8 9 * 9 - 9 - 9 - 4 - 1 +
 	> Result: 42
 	
 	9 8 * 4 * 4 / 2 + 9 - 8 - 8 - 1 - 6 -
@@ -160,11 +157,9 @@ For OSX:
 
 `jot -r 3000 1 1000 | tr '\n' ' '`
 	
-If the command works correctly, the person being evaluated should be able to
-explain the difference in time used for each container selected.
+If the command works correctly, the person being evaluated should be able to explain the difference in time used for each container selected.
 
-If there are any problems during the execution and/or explanation then the
-evaluation stops here.
+If there are any problems during the execution and/or explanation then the evaluation stops here.
 
 
 Yes/No
