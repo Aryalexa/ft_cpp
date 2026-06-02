@@ -22,9 +22,9 @@ fclean: clean
 			rm -f $(NAME)
 test:
 # MAC
-	./PmergeMe `jot -r 30 1 100000 | tr '\n' ' '`
+#	./PmergeMe `jot -r 30 1 100000 | tr '\n' ' '`
 # LINUX
-#  ./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+	./PmergeMe `shuf -i 1-100000 -n 30 | tr "\n" " "`
 
 re: fclean all
 
