@@ -40,7 +40,7 @@ void BitcoinExchange::load_price_hist() {
 	int line_num;
 	
 	// open DB file
-	std::ifstream fin(DB_FILENAME, std::ios::in);
+	std::ifstream fin(DB_FILENAME.c_str(), std::ios::in);
 	if (!fin) 
 		throw std::runtime_error("DB file not found!");
 	// read DB header
@@ -194,7 +194,7 @@ void BitcoinExchange::display_wallet_value(string wallet_filename) {
 	int line_num;
 	
 	// open
-	std::ifstream fin(wallet_filename, std::ios::in);
+	std::ifstream fin(wallet_filename.c_str(), std::ios::in);
 	if (!fin) 
 		throw std::runtime_error("wallet file not found!");
 	// read wallet header
